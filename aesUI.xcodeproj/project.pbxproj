@@ -16,6 +16,11 @@
 		01BB7C782915BA60009F5569 /* aesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BB7C772915BA60009F5569 /* aesUITests.swift */; };
 		01BB7C822915BA60009F5569 /* aesUIUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BB7C812915BA60009F5569 /* aesUIUITests.swift */; };
 		01BB7C842915BA60009F5569 /* aesUIUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BB7C832915BA60009F5569 /* aesUIUITestsLaunchTests.swift */; };
+		B00572E52915C3FC00DD75AC /* Extension_String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00572E42915C3FC00DD75AC /* Extension_String.swift */; };
+		B00572E72915C55F00DD75AC /* Extension_Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00572E62915C55F00DD75AC /* Extension_Array.swift */; };
+		B00572E92915D31A00DD75AC /* Extension_String.UTF8View.Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00572E82915D31A00DD75AC /* Extension_String.UTF8View.Element.swift */; };
+		B014D89029168FF800D41787 /* MatrixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014D88F29168FF800D41787 /* MatrixView.swift */; };
+		B014D8922916915A00D41787 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014D8912916915A00D41787 /* Model.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +53,11 @@
 		01BB7C7D2915BA60009F5569 /* aesUIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = aesUIUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		01BB7C812915BA60009F5569 /* aesUIUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = aesUIUITests.swift; sourceTree = "<group>"; };
 		01BB7C832915BA60009F5569 /* aesUIUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = aesUIUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B00572E42915C3FC00DD75AC /* Extension_String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension_String.swift; sourceTree = "<group>"; };
+		B00572E62915C55F00DD75AC /* Extension_Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension_Array.swift; sourceTree = "<group>"; };
+		B00572E82915D31A00DD75AC /* Extension_String.UTF8View.Element.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension_String.UTF8View.Element.swift; sourceTree = "<group>"; };
+		B014D88F29168FF800D41787 /* MatrixView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixView.swift; sourceTree = "<group>"; };
+		B014D8912916915A00D41787 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +110,11 @@
 			children = (
 				01BB7C612915BA5E009F5569 /* aesUIApp.swift */,
 				01BB7C632915BA5E009F5569 /* ContentView.swift */,
+				B014D88F29168FF800D41787 /* MatrixView.swift */,
+				B014D8912916915A00D41787 /* Model.swift */,
+				B00572E82915D31A00DD75AC /* Extension_String.UTF8View.Element.swift */,
+				B00572E42915C3FC00DD75AC /* Extension_String.swift */,
+				B00572E62915C55F00DD75AC /* Extension_Array.swift */,
 				01BB7C652915BA60009F5569 /* Assets.xcassets */,
 				01BB7C6A2915BA60009F5569 /* Persistence.swift */,
 				01BB7C6C2915BA60009F5569 /* aesUI.xcdatamodeld */,
@@ -263,8 +278,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B014D8922916915A00D41787 /* Model.swift in Sources */,
+				B00572E52915C3FC00DD75AC /* Extension_String.swift in Sources */,
 				01BB7C6B2915BA60009F5569 /* Persistence.swift in Sources */,
 				01BB7C6E2915BA60009F5569 /* aesUI.xcdatamodeld in Sources */,
+				B014D89029168FF800D41787 /* MatrixView.swift in Sources */,
+				B00572E92915D31A00DD75AC /* Extension_String.UTF8View.Element.swift in Sources */,
+				B00572E72915C55F00DD75AC /* Extension_Array.swift in Sources */,
 				01BB7C642915BA5E009F5569 /* ContentView.swift in Sources */,
 				01BB7C622915BA5E009F5569 /* aesUIApp.swift in Sources */,
 			);

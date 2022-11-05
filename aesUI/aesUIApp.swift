@@ -10,11 +10,12 @@ import SwiftUI
 @main
 struct aesUIApp: App {
     let persistenceController = PersistenceController.shared
+    var model = Model()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environmentObject(model)
         }
     }
 }
