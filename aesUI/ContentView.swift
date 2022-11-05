@@ -19,10 +19,6 @@ struct ContentView: View {
                 Button(action: {}, label: {Text("loadMatrix")})
             }
             HStack {
-                VStack(alignment: .leading){
-                    Text("Codepoints:")
-                    Text(self.model.array.description)
-                }
                 Spacer()
                 Button(action: {}, label: {Text("encrypt")})
                 Button(action: {}, label: {Text("decrpyt")})

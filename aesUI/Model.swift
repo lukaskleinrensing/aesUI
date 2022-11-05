@@ -12,43 +12,29 @@ class Model: ObservableObject {
 
     var gridSize: Int = 4
     @Published var text: String
-    @Published var array: Array<String.UTF8View.Element> {
+    @Published var array: Array<Block> {
         willSet {
             objectWillChange.send()
         }
     }
     @Published var key: String = ""
     @Published var result: String = ""
-    @Published var animationArray = 
 
     init(text: String = "") {
         self.text = text
-        self.array = "abcdefghijklmnop".returnByteRepresentation()
+        self.array = Array<Block>()
+        for i in 0...15 {
+            self.array.append(Block(UInt8(i)))
+        }
 
     }
 
     func testmove() {
         withAnimation() {
-            array.insert(contentsOf: "Z".utf8, at: 5)
+            let object = array.last
             array = array.dropLast(1)
+            array.insert(object!, at: 3)
 
         }
-    }
-    
-    func descritiveValue(column: Int, row: Int) -> String {
-
-        var index = 0
-        switch column {
-        case 0:
-            index = row;
-        case 1:
-            index = 4 + row;
-        case 2:
-            index = 8 + row;
-        default:
-            index = 12 + row;
-        }
-        print("for column: \(column) row: \(row):  \(index)")
-        return array[index].description
     }
 }

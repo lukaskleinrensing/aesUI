@@ -21,6 +21,9 @@
 		B00572E92915D31A00DD75AC /* Extension_String.UTF8View.Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00572E82915D31A00DD75AC /* Extension_String.UTF8View.Element.swift */; };
 		B014D89029168FF800D41787 /* MatrixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014D88F29168FF800D41787 /* MatrixView.swift */; };
 		B014D8922916915A00D41787 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014D8912916915A00D41787 /* Model.swift */; };
+		B014D8942917171B00D41787 /* models in Resources */ = {isa = PBXBuildFile; fileRef = B014D8932917171B00D41787 /* models */; };
+		B014D896291717A600D41787 /* TileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014D895291717A600D41787 /* TileView.swift */; };
+		B014D8982917184A00D41787 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014D8972917184A00D41787 /* Block.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +61,9 @@
 		B00572E82915D31A00DD75AC /* Extension_String.UTF8View.Element.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension_String.UTF8View.Element.swift; sourceTree = "<group>"; };
 		B014D88F29168FF800D41787 /* MatrixView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixView.swift; sourceTree = "<group>"; };
 		B014D8912916915A00D41787 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		B014D8932917171B00D41787 /* models */ = {isa = PBXFileReference; lastKnownFileType = folder; path = models; sourceTree = "<group>"; };
+		B014D895291717A600D41787 /* TileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileView.swift; sourceTree = "<group>"; };
+		B014D8972917184A00D41787 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,11 +118,14 @@
 				01BB7C632915BA5E009F5569 /* ContentView.swift */,
 				B014D88F29168FF800D41787 /* MatrixView.swift */,
 				B014D8912916915A00D41787 /* Model.swift */,
+				B014D895291717A600D41787 /* TileView.swift */,
+				B014D8972917184A00D41787 /* Block.swift */,
 				B00572E82915D31A00DD75AC /* Extension_String.UTF8View.Element.swift */,
 				B00572E42915C3FC00DD75AC /* Extension_String.swift */,
 				B00572E62915C55F00DD75AC /* Extension_Array.swift */,
 				01BB7C652915BA60009F5569 /* Assets.xcassets */,
 				01BB7C6A2915BA60009F5569 /* Persistence.swift */,
+				B014D8932917171B00D41787 /* models */,
 				01BB7C6C2915BA60009F5569 /* aesUI.xcdatamodeld */,
 				01BB7C672915BA60009F5569 /* Preview Content */,
 			);
@@ -254,6 +263,7 @@
 			files = (
 				01BB7C692915BA60009F5569 /* Preview Assets.xcassets in Resources */,
 				01BB7C662915BA60009F5569 /* Assets.xcassets in Resources */,
+				B014D8942917171B00D41787 /* models in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +296,8 @@
 				B00572E92915D31A00DD75AC /* Extension_String.UTF8View.Element.swift in Sources */,
 				B00572E72915C55F00DD75AC /* Extension_Array.swift in Sources */,
 				01BB7C642915BA5E009F5569 /* ContentView.swift in Sources */,
+				B014D896291717A600D41787 /* TileView.swift in Sources */,
+				B014D8982917184A00D41787 /* Block.swift in Sources */,
 				01BB7C622915BA5E009F5569 /* aesUIApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
