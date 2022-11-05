@@ -19,6 +19,7 @@ class Model: ObservableObject {
     }
     @Published var key: String = ""
     @Published var result: String = ""
+    @Published var animationArray = 
 
     init(text: String = "") {
         self.text = text
@@ -46,7 +47,6 @@ class Model: ObservableObject {
             index = 8 + row;
         default:
             index = 12 + row;
-
         }
         print("for column: \(column) row: \(row):  \(index)")
         return array[index].description
