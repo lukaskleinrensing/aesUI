@@ -10,6 +10,7 @@ import CoreData
 struct ContentView: View {
 
     @EnvironmentObject var model: Model
+    @State var showingAlert = false
     
     var body: some View {
         GeometryReader { geo in
@@ -50,7 +51,7 @@ struct ContentView: View {
                                         .padding()
                                         .background(Circle()
                                         .fill(self.model.array.blocks.count > 0 ? Color.blue : Color.gray))
-                                })
+                                }).disabled(self.model.array.blocks.count == 0 || !self.model.result.isEmpty)
                                 Button(action: {
                                     while(self.model.state != (self.model.encrypt ? Model.operationState.ciphertext : Model.operationState.plaintext)) {
                                     self.model.nextState()
@@ -60,14 +61,25 @@ struct ContentView: View {
                                         .padding()
                                         .background(Circle()
                                         .fill(self.model.array.blocks.count > 0 ? Color.blue : Color.gray))
-                                })
+                                }).disabled(self.model.array.blocks.count == 0 || !self.model.result.isEmpty)
                                 Button(action: {self.model.encrypt.toggle()
                                 }, label:{
                                     Image(systemName: self.model.encrypt ? "lock.open" : "lock")
                                         .padding()
                                         .background(Circle()
                                         .fill(Color.blue))
-                                })
+                                }).disabled(self.model.array.blocks.count != 0)
+                                Button(action: {self.showingAlert = true
+                                }, label:{
+                                    Image(systemName: "trash.fill")
+                                        .padding()
+                                        .background(Circle()
+                                        .fill(Color.red))
+                                }).disabled(self.model.array.blocks.count == 0)
+                                    .alert("Important message", isPresented: $showingAlert) {
+                                        Button("Okay") {self.showingAlert = false} //TODO: Implement reseting matrix and roundCount }
+                                        Button(action: {self.showingAlert = false}, label: {Text("Cancel").foregroundColor(.red)})
+                                }
                             }
                         }
 
@@ -86,7 +98,7 @@ struct ContentView: View {
                             Button(action: model.nextState, label: {Text("nextState").frame(width:100)})
                             Button(action: model.resetState, label: {Text("resetState").frame(width:100)})
                             Button(action: model.testmove, label: {Text("moveTiles").frame(width:100)})
-                            Button(action: model.matrixToText, label: {Text("matrixToResult").frame(width:100)})
+                            Button(action: model.matrixToText , label: {Text("matrixToResult").frame(width:100)})
                         }
 
                     }
