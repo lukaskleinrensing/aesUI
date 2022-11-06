@@ -22,8 +22,9 @@
 		B014D89029168FF800D41787 /* MatrixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014D88F29168FF800D41787 /* MatrixView.swift */; };
 		B014D8922916915A00D41787 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014D8912916915A00D41787 /* Model.swift */; };
 		B014D8942917171B00D41787 /* models in Resources */ = {isa = PBXBuildFile; fileRef = B014D8932917171B00D41787 /* models */; };
-		B014D896291717A600D41787 /* TileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014D895291717A600D41787 /* TileView.swift */; };
+		B014D896291717A600D41787 /* BlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014D895291717A600D41787 /* BlockView.swift */; };
 		B014D8982917184A00D41787 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014D8972917184A00D41787 /* Block.swift */; };
+		B014D89A291727F400D41787 /* StateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014D899291727F400D41787 /* StateView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,8 +63,9 @@
 		B014D88F29168FF800D41787 /* MatrixView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixView.swift; sourceTree = "<group>"; };
 		B014D8912916915A00D41787 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		B014D8932917171B00D41787 /* models */ = {isa = PBXFileReference; lastKnownFileType = folder; path = models; sourceTree = "<group>"; };
-		B014D895291717A600D41787 /* TileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileView.swift; sourceTree = "<group>"; };
+		B014D895291717A600D41787 /* BlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockView.swift; sourceTree = "<group>"; };
 		B014D8972917184A00D41787 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
+		B014D899291727F400D41787 /* StateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,9 +118,10 @@
 			children = (
 				01BB7C612915BA5E009F5569 /* aesUIApp.swift */,
 				01BB7C632915BA5E009F5569 /* ContentView.swift */,
+				B014D899291727F400D41787 /* StateView.swift */,
 				B014D88F29168FF800D41787 /* MatrixView.swift */,
 				B014D8912916915A00D41787 /* Model.swift */,
-				B014D895291717A600D41787 /* TileView.swift */,
+				B014D895291717A600D41787 /* BlockView.swift */,
 				B014D8972917184A00D41787 /* Block.swift */,
 				B00572E82915D31A00DD75AC /* Extension_String.UTF8View.Element.swift */,
 				B00572E42915C3FC00DD75AC /* Extension_String.swift */,
@@ -294,9 +297,10 @@
 				01BB7C6E2915BA60009F5569 /* aesUI.xcdatamodeld in Sources */,
 				B014D89029168FF800D41787 /* MatrixView.swift in Sources */,
 				B00572E92915D31A00DD75AC /* Extension_String.UTF8View.Element.swift in Sources */,
+				B014D89A291727F400D41787 /* StateView.swift in Sources */,
 				B00572E72915C55F00DD75AC /* Extension_Array.swift in Sources */,
 				01BB7C642915BA5E009F5569 /* ContentView.swift in Sources */,
-				B014D896291717A600D41787 /* TileView.swift in Sources */,
+				B014D896291717A600D41787 /* BlockView.swift in Sources */,
 				B014D8982917184A00D41787 /* Block.swift in Sources */,
 				01BB7C622915BA5E009F5569 /* aesUIApp.swift in Sources */,
 			);

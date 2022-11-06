@@ -16,43 +16,55 @@ struct ContentView: View {
         VStack {
             HStack {
                 TextField("Klartext", text: self.$model.text)
-                Button(action: {}, label: {Text("loadMatrix")})
-            }
-            HStack {
-                Spacer()
-                Button(action: {}, label: {Text("encrypt")})
-                Button(action: {}, label: {Text("decrpyt")})
+                    .font(.system(size: 20))
+
             }
             HStack {
                 MatrixView()
+                    .padding()
                     .frame(width: geo.size.width * 0.5)
                 Spacer()
                 VStack {
-                    Image(systemName: "arrow.down")
-                    Text("round Key")
-                    Image(systemName: "arrow.down")
-                    Text("Sub Byte")
-                    Image(systemName: "arrow.down")
-                    Text("Shift Rows")
-                    Image(systemName: "arrow.down")
-                    Text("Mix Columns")
-                    Image(systemName: "arrow.down")
-                    Text("Key")
-                }
-                .font(.title)
-                .frame(width: geo.size.width * 0.2)
-                VStack {
-                    Button(action: {
-                        self.model.testmove()
-                    }, label: {Text("Step")})
-                    Text("roundkey:")
-                    Text("          ")
+                    HStack {
+                        StateView()
+                            .padding()
+
+                        VStack (alignment: .trailing){
+                            Button(action: {}, label: {Text("loadMatrix").frame(width: 100)})
+                                .buttonStyle(.bordered)
+                            Button(action: {}, label: {Text("encrypt").frame(width: 100)})
+                                .buttonStyle(.bordered)
+                            Button(action: {}, label: {Text("decrpyt").frame(width: 100)})
+                                .buttonStyle(.bordered)
+                            Button(action: {}, label: {Text("Step").frame(width: 100)})
+                            .buttonStyle(.bordered)
+
+                            Text("Debug Buttons")
+                                .padding(.top)
+                            Button(action: model.nextState, label: {Text("nextState").frame(width:100)})
+                            Button(action: model.resetState, label: {Text("resetState").frame(width:100)})
+                            Button(action: model.testmove, label: {Text("moveTiles").frame(width:100)})
+                        }
+
+                    }
                     Spacer()
+
+                    VStack {
+                        Text("Rundenschlüssel:")
+                            .font(.title)
+                        ForEach( model.roundKeys, id: \.self){ key in
+                            Text(key)
+                                .font(.system(size: 15))
+                        }
+
+                    }
                 }
-                .frame(width: geo.size.width * 0.2)
+
             }
-            TextField("Key", text: self.$model.key)
-            TextField("Result:", text: self.$model.result)
+            TextField("Schlüssel", text: self.$model.key)
+                .font(.system(size: 20))
+            TextField("Ergebnis", text: self.$model.result)
+                .font(.system(size: 20))
 
         }
         .padding()

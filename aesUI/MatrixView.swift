@@ -23,6 +23,8 @@ struct MatrixView: View {
                 LazyHGrid(rows: rows, spacing: 10) {
                     ForEach(model.array) { block in
                         BlockView(block: block)
+                            .frame(width: geo.size.width / 4 )
+
                     }
                 }
                 .padding()

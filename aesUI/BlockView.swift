@@ -16,7 +16,7 @@ struct BlockView: View {
                 .font(.title)
                 .foregroundColor(.black)
         }
-        .frame(width: 120, height: 120)
+        
     }
 }
 
