@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0186AFF02915BF60009E7518 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186AFEF2915BF60009E7518 /* Matrix.swift */; };
+		0186AFF22915D9D3009E7518 /* BlockSupplantHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186AFF12915D9D3009E7518 /* BlockSupplantHelper.swift */; };
 		01BB7C622915BA5E009F5569 /* aesUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BB7C612915BA5E009F5569 /* aesUIApp.swift */; };
 		01BB7C642915BA5E009F5569 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BB7C632915BA5E009F5569 /* ContentView.swift */; };
 		01BB7C662915BA60009F5569 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01BB7C652915BA60009F5569 /* Assets.xcassets */; };
@@ -45,6 +47,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0186AFEF2915BF60009E7518 /* Matrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix.swift; sourceTree = "<group>"; };
+		0186AFF12915D9D3009E7518 /* BlockSupplantHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockSupplantHelper.swift; sourceTree = "<group>"; };
 		01BB7C5E2915BA5E009F5569 /* aesUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = aesUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01BB7C612915BA5E009F5569 /* aesUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = aesUIApp.swift; sourceTree = "<group>"; };
 		01BB7C632915BA5E009F5569 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -93,6 +97,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0186AFEE2915BF3B009E7518 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				0186AFEF2915BF60009E7518 /* Matrix.swift */,
+				0186AFF12915D9D3009E7518 /* BlockSupplantHelper.swift */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
 		01BB7C552915BA5E009F5569 = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +129,7 @@
 		01BB7C602915BA5E009F5569 /* aesUI */ = {
 			isa = PBXGroup;
 			children = (
+				0186AFEE2915BF3B009E7518 /* models */,
 				01BB7C612915BA5E009F5569 /* aesUIApp.swift */,
 				01BB7C632915BA5E009F5569 /* ContentView.swift */,
 				B014D899291727F400D41787 /* StateView.swift */,
@@ -294,6 +308,8 @@
 				B014D8922916915A00D41787 /* Model.swift in Sources */,
 				B00572E52915C3FC00DD75AC /* Extension_String.swift in Sources */,
 				01BB7C6B2915BA60009F5569 /* Persistence.swift in Sources */,
+				0186AFF02915BF60009E7518 /* Matrix.swift in Sources */,
+				0186AFF22915D9D3009E7518 /* BlockSupplantHelper.swift in Sources */,
 				01BB7C6E2915BA60009F5569 /* aesUI.xcdatamodeld in Sources */,
 				B014D89029168FF800D41787 /* MatrixView.swift in Sources */,
 				B00572E92915D31A00DD75AC /* Extension_String.UTF8View.Element.swift in Sources */,
@@ -458,10 +474,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"aesUI/Preview Content\"";
-				DEVELOPMENT_TEAM = 59BYP5CNQ9;
+				DEVELOPMENT_TEAM = YDECD5TAT2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -487,6 +504,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"aesUI/Preview Content\"";
