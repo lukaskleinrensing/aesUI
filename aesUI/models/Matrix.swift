@@ -160,6 +160,43 @@ struct MatrixHelper {
         return restultMatrix
     }
     
+    static func multiplyMatrixWithVectorMod2(matrix: [[UInt8]], vector: [UInt8]) throws -> [UInt8] {
+        
+        // Check compatibility of matrix and vector
+        
+        let m0Count = matrix[0].count
+        
+        if (m0Count != vector.count) {
+            throw MatrixError.IncompatibleMultiplicationError
+        }
+        
+        for m in 1..<matrix.count {
+            if matrix[m].count != m0Count {
+                throw MatrixError.IncompatibleMultiplicationError
+            }
+        }
+        
+        // Calculate product matrixs
+        
+        var resultMatrix = [UInt8]()
+        for n in 0..<matrix.count {
+            resultMatrix.append(UInt8(n))
+        }
+        
+        for i in 0..<matrix.count {
+            print("i: \(i)")
+            var rowResult: UInt8 = 0
+            
+            for j in 0..<m0Count {
+                print(" j: \(j)")
+                rowResult = (rowResult + (matrix[i][j] * vector[j])) % 2
+            }
+            resultMatrix[i] = rowResult
+        }
+        
+        return resultMatrix
+    }
+    
     static func intAsBinaryArray(_ i: UInt8, minLength: Int = 0, lastReturn: Bool = true) -> [UInt8] {
     
         var result = [UInt8]()
