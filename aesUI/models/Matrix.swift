@@ -57,7 +57,17 @@ struct Matrix {
         var newBlocks = [UInt8]()
         
         for i in 0...(self.blocks.count - 1) {
-            newBlocks[i] = calculateSub(self.blocks[i])
+            newBlocks[i] = BlockSupplantHelper.getSubBlockFor(self.blocks[i])
+        }
+        
+        self.blocks = newBlocks
+    }
+    
+    mutating func subBitsInvers() {
+        var newBlocks = [UInt8]()
+        
+        for i in 0...(self.blocks.count - 1) {
+            newBlocks[i] = BlockSupplantHelper.getInvSubBlockFor(self.blocks[i])
         }
         
         self.blocks = newBlocks
@@ -108,10 +118,6 @@ struct Matrix {
     
     func mixColumsInvers() {
         //TODO: Implementieren
-    }
-    
-    func calculateSub(_ data: Data) {
-        
     }
 }
 
