@@ -22,8 +22,8 @@ class Model: ObservableObject {
 
     var gridSize: Int = 4
 
-    @Published var text: String
-    @Published var array: Array<Block> {
+    @Published var text: String  {didSet{if text.count > 16 {text = String(text.dropLast(text.count - 16))}}}
+    @Published var array: Matrix {
         willSet {
             objectWillChange.send()
         }
@@ -33,11 +33,15 @@ class Model: ObservableObject {
     @Published var roundKeys = Array<String>()
 
     init(text: String = "") {
-        self.text = text
-        self.array = Array<Block>()
+        
+        var blocks = [Block]()
         for i in 0...15 {
-            self.array.append(Block(UInt8(i)))
+            blocks.append(Block(UInt8(i)))
         }
+        
+        self.text = text
+        self.array = Matrix(blocks: blocks, typ: MatrixType.bit128)
+        
         self.roundKeys.append("test")
         self.roundKeys.append("test")
 
@@ -46,9 +50,9 @@ class Model: ObservableObject {
 
     func testmove() {
         withAnimation() {
-            let object = array.last
-            array = array.dropLast(1)
-            array.insert(object!, at: 3)
+//            let object = array[array.blocks.count - 1]
+//            array = array.dropLast(1)
+//            array.insert(object!, at: 3)
         }
     }
 
@@ -74,5 +78,14 @@ class Model: ObservableObject {
     }
     func resetState() {
         self.state = .waiting
+    }
+    
+    func textToMatrix() {
+        
+        let textArray = self.text.prefix(16).map{String($0)}
+        print("Array: \(textArray)")
+        for i in 0..<textArray.count {
+            self.array.blocks[i].value = UInt8(Array(textArray[i].utf8.lazy.map { Int($0) })[0])
+        }
     }
 }

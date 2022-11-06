@@ -30,7 +30,7 @@ struct ContentView: View {
                             .padding()
 
                         VStack (alignment: .trailing){
-                            Button(action: {}, label: {Text("loadMatrix").frame(width: 100)})
+                            Button(action: model.textToMatrix, label: {Text("loadMatrix").frame(width: 100)})
                                 .buttonStyle(.bordered)
                             Button(action: {}, label: {Text("encrypt").frame(width: 100)})
                                 .buttonStyle(.bordered)
