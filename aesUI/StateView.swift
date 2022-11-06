@@ -8,18 +8,29 @@
 import SwiftUI
 
 struct StateView: View {
+    
+    @EnvironmentObject var model: Model
+    
     var body: some View {
         VStack {
-            Image(systemName: "arrow.down")
-            StateElement(name: "Rundenschlüssel", state: Model.operationState.roundKey)
-            Image(systemName: "arrow.down")
-            StateElement(name: "Sub Byte", state: Model.operationState.subByte)
-            Image(systemName: "arrow.down")
-            StateElement(name: "Shift Rows", state: Model.operationState.shiftRows)
-            Image(systemName: "arrow.down")
-            StateElement(name: "Mix Columns", state: Model.operationState.mixColumns)
-            Image(systemName: "arrow.down")
-            StateElement(name: "Key", state: Model.operationState.key)
+            VStack {
+                StateElement(name: "Klartext", state: Model.operationState.plaintext)
+                Image(systemName: self.model.encrypt ? "arrow.down" : "arrow.up")
+                StateElement(name: "Rundenschlüssel", state: Model.operationState.roundKey)
+                Image(systemName: self.model.encrypt ? "arrow.down" : "arrow.up")
+                StateElement(name: "Sub Byte", state: Model.operationState.subByte)
+                Image(systemName: self.model.encrypt ? "arrow.down" : "arrow.up")
+                StateElement(name: "Shift Rows", state: Model.operationState.shiftRows)
+                Image(systemName: self.model.encrypt ? "arrow.down" : "arrow.up")
+                StateElement(name: "Mix Columns", state: Model.operationState.mixColumns)
+                Image(systemName: self.model.encrypt ? "arrow.down" : "arrow.up")
+                
+            }
+            VStack {
+                StateElement(name: "Key", state: Model.operationState.key)
+                Image(systemName: self.model.encrypt ? "arrow.down" : "arrow.up")
+                StateElement(name: "Chiffrat", state: Model.operationState.ciphertext)
+            }
         }
         .font(.title)
     }
@@ -36,7 +47,7 @@ struct StateElement: View {
                 .frame(width: 200)
                 .font(.system(size: 20))
                 .foregroundColor(.primary)
-                .background(RoundedRectangle(cornerRadius: 20).fill(Color.red))
+                .background(RoundedRectangle(cornerRadius: 20).fill(model.isCalculating ? Color.red : Color.gray))
         } else {
             Text(name)
                 .font(.system(size: 15))
@@ -48,8 +59,8 @@ struct StateElement: View {
     }
 }
 
-struct StateView_Previews: PreviewProvider {
-    static var previews: some View {
-        StateView()
-    }
-}
+//struct StateView_Previews: PreviewProvider {
+//    static var previews: some View {
+////        StateView(true)
+//    }
+//}

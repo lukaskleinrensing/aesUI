@@ -40,17 +40,27 @@ struct Matrix {
     func asConsoleString() -> String {
         let s = """
         +--+--+--+--+
-        |\(self.blocks[0].value)|\(self.blocks[4])|\(self.blocks[8])|\(self.blocks[12])|
+        |\(self.blocks[0].value)|\(self.blocks[4].value)|\(self.blocks[8].value)|\(self.blocks[12].value)|
         +--+--+--+--+
-        |\(self.blocks[1])|\(self.blocks[5])|\(self.blocks[9])|\(self.blocks[13])|
+        |\(self.blocks[1].value)|\(self.blocks[5].value)|\(self.blocks[9].value)|\(self.blocks[13].value)|
         +--+--+--+--+
-        |\(self.blocks[2])|\(self.blocks[6])|\(self.blocks[10])|\(self.blocks[14])|
+        |\(self.blocks[2].value)|\(self.blocks[6].value)|\(self.blocks[10].value)|\(self.blocks[14].value)|
         +--+--+--+--+
-        |\(self.blocks[3])|\(self.blocks[7])|\(self.blocks[11])|\(self.blocks[15])|
+        |\(self.blocks[3].value)|\(self.blocks[7].value)|\(self.blocks[11].value)|\(self.blocks[15].value)|
         +--+--+--+--+
         """
         
         return s
+    }
+    
+    func emptyArrayOfBlocks(_ length: Int) -> [UInt8]{
+        var newBlocks = [UInt8]()
+        
+        for _ in 0..<length {
+            newBlocks.append(UInt8(0))
+        }
+        
+        return newBlocks
     }
     
     mutating func updateBlocks(_ newBlocks: [UInt8]) {
@@ -61,9 +71,9 @@ struct Matrix {
     }
     
     mutating func subBits() throws {
-        var newBlocks = [UInt8]()
-        
-        for i in 0...(self.blocks.count - 1) {
+        var newBlocks = emptyArrayOfBlocks(self.blocks.count)
+                
+        for i in 0..<(self.blocks.count) {
             try newBlocks[i] = BlockSupplantHelper.getSubBlockFor(self.blocks[i].value)
         }
         
@@ -82,6 +92,7 @@ struct Matrix {
     }
     
     mutating func shiftRows() {
+        
         var newBlocks = [UInt8]()
         
         let n = self.blocks.count
@@ -237,11 +248,9 @@ struct MatrixHelper {
         }
         
         for i in 0..<matrix.count {
-            print("i: \(i)")
             var rowResult: UInt8 = 0
             
             for j in 0..<matrix.count {
-                print(" j: \(j)")
                 rowResult += matrix[i][j] * vector[j]
             }
             restultMatrix[i] = rowResult
@@ -274,12 +283,10 @@ struct MatrixHelper {
         }
         
         for i in 0..<matrix.count {
-            print("i: \(i)")
             var rowResult: UInt8 = 0
             
             for j in 0..<m0Count {
-                print(" j: \(j)")
-                let rowResultAsInt = Int(rowResult + (matrix[i][j] * vector[j]))
+                let rowResultAsInt = Int(rowResult) + (Int(matrix[i][j]) * Int(vector[j]))
                 rowResult = UInt8(rowResultAsInt % modul)
             }
             resultMatrix[i] = rowResult

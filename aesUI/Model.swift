@@ -12,17 +12,34 @@ class Model: ObservableObject {
 
     // Enum to track the state of the matrix operation
     enum operationState {
-        case waiting, roundKey, subByte, shiftRows, mixColumns, key
+        case plaintext, waiting, roundKey, subByte, shiftRows, mixColumns, key, ciphertext
     }
-    @Published var state = operationState.waiting {
+    @Published var state = operationState.plaintext {
         willSet {
             objectWillChange.send()
         }
     }
-
+    @Published var isCalculating = false
+    @Published var encrypt = true
+    
     var gridSize: Int = 4
+    var matrixBlockCount: Int {
+        switch self.selectedBitType {
+            case MatrixType.bit128:
+                return 16
+            case MatrixType.bit192:
+                return 24
+            case MatrixType.bit256:
+                return 32
+        }
+    }
+    
+    @Published var roundCount = 0
+    var maxRounds: Int {
+        return 10
+    }
 
-    @Published var text: String  {didSet{if text.count > 16 {text = String(text.dropLast(text.count - 16))}}}
+    @Published var text: String  {didSet{if text.count > matrixBlockCount {text = String(text.dropLast(text.count - matrixBlockCount))}}}
     @Published var array: Matrix {
         willSet {
             objectWillChange.send()
@@ -31,13 +48,15 @@ class Model: ObservableObject {
     @Published var key: String = ""
     @Published var result: String = ""
     @Published var roundKeys = Array<String>()
+    
+    @Published var selectedBitType = MatrixType.bit128
 
     init(text: String = "") {
         
         var blocks = [Block]()
-        for i in 0...15 {
-            blocks.append(Block(UInt8(i)))
-        }
+//        for i in 0...15 {
+//            blocks.append(Block(UInt8(i)))
+//        }
         
         self.text = text
         self.array = Matrix(blocks: blocks, typ: MatrixType.bit128)
@@ -57,24 +76,108 @@ class Model: ObservableObject {
     }
 
     func nextState() {
+        self.isCalculating = true
         withAnimation(){
             switch self.state {
+            case .plaintext:
+                // Verschlüsselung
+                if self.encrypt {
+                    if(self.array.blocks.count != 0) {
+                        self.state = .roundKey
+                    }
+                } // Entschlüsselung
+                else {
+                    self.state = .plaintext
+                }
             case .roundKey:
-                self.state = .subByte
+                // Verschlüsselung
+                if self.encrypt {
+                    self.state = .subByte
+                } // Entschlüsselung
+                else {
+                    if self.maxRounds == self.roundCount {
+                        self.state = .plaintext
+                    } else {
+                        self.roundCount += 1
+                        print(self.roundCount)
+                        self.state = .key
+                    }
+                }
             case .subByte:
-                self.state = .shiftRows
+                // Verschlüsselung
+                if self.encrypt {
+                    do {
+                        try self.array.subBits()
+                    } catch {
+                        break
+                    }
+                    
+                    self.state = .shiftRows
+                } // Entschlüsselung
+                else {
+                    do {
+                        try self.array.subBitsInvers()
+                    } catch {
+                        break
+                    }
+                    
+                    self.state = .roundKey
+                }
             case .shiftRows:
-                self.state = .mixColumns
+                // Verschlüsselung
+                if self.encrypt {
+                    self.array.shiftRows()
+                    
+                    self.state = .mixColumns
+                } // Entschlüsselung
+                else {
+                    self.array.shiftRowsInvers()
+                    
+                    self.state = .subByte
+                }
             case .mixColumns:
-                self.state = .key
+                // Verschlüsselung
+                if self.encrypt {
+                    self.array.mixColums()
+                    
+                    self.state = .key
+                } // Entschlüsselung
+                else {
+                    self.array.mixColumsInv()
+                    
+                    self.state = .shiftRows
+                }
             case .key:
+                // Verschlüsselung
+                if self.encrypt {
+                    if self.maxRounds == self.roundCount {
+                        self.state = .ciphertext
+                    } else {
+                        self.roundCount += 1
+                        print(self.roundCount)
+                        self.state = .roundKey
+                    }
+                } // Entschlüsselung
+                else {
+                    self.state = .mixColumns
+                }
+            case .ciphertext:
+                // Verschlüsselung
+                if self.encrypt {
+                    self.matrixToText()
+                    self.state = .ciphertext
+                } // Entschlüsselung
+                else {
+                    self.state = .key
+                }
                 self.state = .roundKey
             case .waiting:
-                self.state = .roundKey
-            default:
                 self.state = .waiting
+//            default:
+//                self.state = .waiting
             }
         }
+        self.isCalculating = false
     }
     func resetState() {
         self.state = .waiting
@@ -82,10 +185,44 @@ class Model: ObservableObject {
     
     func textToMatrix() {
         
-        let textArray = self.text.prefix(16).map{String($0)}
+        self.state = operationState.plaintext
+        self.roundCount = 0
+        
+        let matrixSize = self.matrixBlockCount
+        
+        var textArray = self.text.prefix(matrixSize).map{String($0)}
+        
+        while (textArray.count < matrixSize) {
+            textArray.append(" ")
+        }
+        
         print("Array: \(textArray)")
+        
+        if self.array.blocks.count != matrixSize {
+            var emptyBlocks = [Block]()
+            
+            for i in 0..<matrixSize {
+                emptyBlocks.append(Block(UInt8(Array(textArray[i].utf8.lazy.map { Int($0) })[0])))
+            }
+            self.array = Matrix(blocks: emptyBlocks, typ: self.selectedBitType)
+        }
+        
         for i in 0..<textArray.count {
             self.array.blocks[i].value = UInt8(Array(textArray[i].utf8.lazy.map { Int($0) })[0])
         }
+    }
+    
+    func matrixToText() {
+        
+        var mText = ""
+        
+        for i in 0..<self.array.blocks.count {
+            let data = withUnsafeBytes(of: Int(self.array.blocks[i].value)) { Data($0) }
+            mText += String(data: data, encoding: .utf8) ?? ""
+            print("Data: \"\(data)\", als String: \"\(String(data: data, encoding: .utf8)!)\"")
+        }
+        print("Result: \(mText)")
+        
+        self.result = mText
     }
 }

@@ -10,13 +10,16 @@ import CoreData
 struct ContentView: View {
 
     @EnvironmentObject var model: Model
-
+    
     var body: some View {
         GeometryReader { geo in
         VStack {
             HStack {
                 TextField("Klartext", text: self.$model.text)
                     .font(.system(size: 20))
+                    .onSubmit {model.textToMatrix()
+                        model.state = .roundKey
+                    }
 
             }
             HStack {
@@ -25,9 +28,48 @@ struct ContentView: View {
                     .frame(width: geo.size.width * 0.5)
                 Spacer()
                 VStack {
+                    Picker("", selection: $model.selectedBitType) {
+                        Text("128 Bit").tag(MatrixType.bit128)
+                        Text("192 Bit").tag(MatrixType.bit192)
+                        Text("256 Bit").tag(MatrixType.bit256)
+                        
+                    }.pickerStyle(SegmentedPickerStyle())
+                    
                     HStack {
-                        StateView()
-                            .padding()
+                        VStack {
+                            StateView()
+                                .padding()
+                            VStack{
+                                Text("Verbleibende Runden:")
+                                Text("\(model.maxRounds - model.roundCount)")
+                            }
+                            HStack {
+                                Button(action: {self.model.nextState()
+                                }, label:{
+                                    Image(systemName: "play.fill")
+                                        .padding()
+                                        .background(Circle()
+                                        .fill(self.model.array.blocks.count > 0 ? Color.blue : Color.gray))
+                                })
+                                Button(action: {
+                                    while(self.model.state != (self.model.encrypt ? Model.operationState.ciphertext : Model.operationState.plaintext)) {
+                                    self.model.nextState()
+                                    }
+                                }, label:{
+                                    Image(systemName: "forward.fill")
+                                        .padding()
+                                        .background(Circle()
+                                        .fill(self.model.array.blocks.count > 0 ? Color.blue : Color.gray))
+                                })
+                                Button(action: {self.model.encrypt.toggle()
+                                }, label:{
+                                    Image(systemName: self.model.encrypt ? "lock.open" : "lock")
+                                        .padding()
+                                        .background(Circle()
+                                        .fill(Color.blue))
+                                })
+                            }
+                        }
 
                         VStack (alignment: .trailing){
                             Button(action: model.textToMatrix, label: {Text("loadMatrix").frame(width: 100)})
@@ -44,6 +86,7 @@ struct ContentView: View {
                             Button(action: model.nextState, label: {Text("nextState").frame(width:100)})
                             Button(action: model.resetState, label: {Text("resetState").frame(width:100)})
                             Button(action: model.testmove, label: {Text("moveTiles").frame(width:100)})
+                            Button(action: model.matrixToText, label: {Text("matrixToResult").frame(width:100)})
                         }
 
                     }
