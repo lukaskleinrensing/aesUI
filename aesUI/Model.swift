@@ -22,7 +22,14 @@ class Model: ObservableObject {
 
     var gridSize: Int = 4
 
-    @Published var text: String
+    @Published var text: String {
+        didSet {
+            if text.count > 16 {
+
+                text = String(text.dropLast( text.count - 16))
+            }
+        }
+    }
     @Published var array: Array<Block> {
         willSet {
             objectWillChange.send()
@@ -31,6 +38,7 @@ class Model: ObservableObject {
     @Published var key: String = ""
     @Published var result: String = ""
     @Published var roundKeys = Array<String>()
+    @Published var animationSpeed = 1.0
 
     init(text: String = "") {
         self.text = text
@@ -45,7 +53,7 @@ class Model: ObservableObject {
     }
 
     func testmove() {
-        withAnimation() {
+        withAnimation(.easeInOut(duration: animationSpeed)) {
             let object = array.last
             array = array.dropLast(1)
             array.insert(object!, at: 3)

@@ -38,12 +38,15 @@ struct ContentView: View {
                                 .buttonStyle(.bordered)
                             Button(action: {}, label: {Text("Step").frame(width: 100)})
                             .buttonStyle(.bordered)
-
-                            Text("Debug Buttons")
-                                .padding(.top)
-                            Button(action: model.nextState, label: {Text("nextState").frame(width:100)})
-                            Button(action: model.resetState, label: {Text("resetState").frame(width:100)})
-                            Button(action: model.testmove, label: {Text("moveTiles").frame(width:100)})
+                            VStack (alignment: .trailing){
+                                Text("Debug Buttons")
+                                    .padding(.top)
+                                Button(action: model.nextState, label: {Text("nextState").frame(width:100)})
+                                Button(action: model.resetState, label: {Text("resetState").frame(width:100)})
+                                Button(action: model.testmove, label: {Text("moveTiles").frame(width:100)})
+                                Slider(value: $model.animationSpeed, in: 0...10)
+                                Text("AnimationSpeed \(model.animationSpeed, specifier: "%.1f") Sekunden")
+                            }
                         }
 
                     }
@@ -68,6 +71,7 @@ struct ContentView: View {
 
         }
         .padding()
+        .frame(minWidth: 800, minHeight: 500)
         }
 
     }
@@ -76,5 +80,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(Model())
+            .frame(width: 800, height: 500)
     }
 }
