@@ -38,7 +38,7 @@ struct BlockSupplantHelper {
         let blockBinary = MatrixHelper.intAsBinaryArray(block)
         let blockMultSubBlock: [UInt8]
         do {
-            try blockMultSubBlock = MatrixHelper.multiplyMatrixWithVector(matrix: subMatrix, vector: blockBinary)
+            try blockMultSubBlock = MatrixHelper.multiplyMatrixWithVectorMod(matrix: subMatrix, vector: blockBinary, modul: 2)
         } catch {
             throw MatrixError.IncompatibleMultiplicationError
         }
@@ -52,7 +52,7 @@ struct BlockSupplantHelper {
         let blockBinary = MatrixHelper.intAsBinaryArray(block)
         let blockMultSubBlock: [UInt8]
         do {
-            try blockMultSubBlock = MatrixHelper.multiplyMatrixWithVector(matrix: subInvMatrix, vector: blockBinary)
+            try blockMultSubBlock = MatrixHelper.multiplyMatrixWithVectorMod(matrix: subInvMatrix, vector: blockBinary, modul: 2)
         } catch {
             throw MatrixError.IncompatibleMultiplicationError
         }

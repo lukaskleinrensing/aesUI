@@ -113,11 +113,85 @@ struct Matrix {
     }
     
     func mixColums() {
-        //TODO: Implementieren
+        
+        var result = blocks
+        
+        let m: [[UInt8]] = [
+        [2,3,1,1],
+        [1,2,3,1],
+        [1,1,2,3],
+        [3,1,1,2]
+        ]
+        
+        for i in 0..<(blocks.count/4) {
+            
+            var vector = [UInt8]()
+            
+            vector.append(self.blocks[(i * 1 + 0) % self.blocks.count])
+            vector.append(self.blocks[(i * 1 + 4) % self.blocks.count])
+            vector.append(self.blocks[(i * 1 + 8) % self.blocks.count])
+            vector.append(self.blocks[(i * 1 + 12) % self.blocks.count])
+            
+            var newColum = [UInt8]()
+                    
+            do {
+                try newColum = self.multiplyMatrixWithVectorMod(matrix: m, vector: vector, modul: 256)
+            } catch {
+                //TODO:
+            }
+            
+            result[(i * 1 + 0) % self.blocks.count] = newColum[0]
+            result[(i * 1 + 4) % self.blocks.count] = newColum[1]
+            result[(i * 1 + 8) % self.blocks.count] = newColum[2]
+            result[(i * 1 + 12) % self.blocks.count] = newColum[3]
+            
+        }
+        
+        return result
     }
-    
-    func mixColumsInvers() {
-        //TODO: Implementieren
+
+    func mixColumsInv() {
+        
+        var result = blocks
+        
+        let m: [[UInt8]] = [
+    //    [2,3,1,1],
+    //    [14,11,13,9],
+    //    [9,14,11,13],
+    //    [11,13,9,14]
+    //    ]
+            [212, 161, 7, 59],
+            [59, 212, 161, 7],
+            [7, 59, 212, 161],
+            [161, 7, 59, 212]
+            ]
+        
+        for i in 0..<(self.blocks.count/4) {
+            
+            var vector = [UInt8]()
+            
+            vector.append(self.blocks[(i * 1 + 0) % self.blocks.count])
+            vector.append(self.blocks[(i * 1 + 4) % self.blocks.count])
+            vector.append(self.blocks[(i * 1 + 8) % self.blocks.count])
+            vector.append(self.blocks[(i * 1 + 12) % self.blocks.count])
+            
+            var newColum = [UInt8]()
+            
+            
+            do {
+                try newColum = self.multiplyMatrixWithVectorMod(matrix: m, vector: vector, modul: 256)
+            } catch {
+                //TODO:
+            }
+            
+            result[(i * 1 + 0) % self.blocks.count] = newColum[0]
+            result[(i * 1 + 4) % self.blocks.count] = newColum[1]
+            result[(i * 1 + 8) % self.blocks.count] = newColum[2]
+            result[(i * 1 + 12) % self.blocks.count] = newColum[3]
+            
+        }
+        
+        return result
     }
 }
 
@@ -158,6 +232,44 @@ struct MatrixHelper {
         }
         
         return restultMatrix
+    }
+    
+    static func multiplyMatrixWithVectorMod(matrix: [[UInt8]], vector: [UInt8], modul: Int) throws -> [UInt8] {
+        
+        // Check compatibility of matrix and vector
+        
+        let m0Count = matrix[0].count
+        
+        if (m0Count != vector.count) {
+            throw MatrixError.IncompatibleMultiplicationError
+        }
+        
+        for m in 1..<matrix.count {
+            if matrix[m].count != m0Count {
+                throw MatrixError.IncompatibleMultiplicationError
+            }
+        }
+        
+        // Calculate product matrixs
+        
+        var resultMatrix = [UInt8]()
+        for n in 0..<matrix.count {
+            resultMatrix.append(UInt8(n))
+        }
+        
+        for i in 0..<matrix.count {
+            print("i: \(i)")
+            var rowResult: UInt8 = 0
+            
+            for j in 0..<m0Count {
+                print(" j: \(j)")
+                let rowResultAsInt = Int(rowResult + (matrix[i][j] * vector[j]))
+                rowResult = UInt8(rowResultAsInt % modul)
+            }
+            resultMatrix[i] = rowResult
+        }
+        
+        return resultMatrix
     }
     
     static func intAsBinaryArray(_ i: UInt8, minLength: Int = 0, lastReturn: Bool = true) -> [UInt8] {
