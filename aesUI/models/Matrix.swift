@@ -53,13 +53,33 @@ struct Matrix {
         return s
     }
     
+    mutating func subBits() {
+        var newBlocks = [UInt8]()
+        
+        for i in 0...(self.blocks.count - 1) {
+            newBlocks[i] = BlockSupplantHelper.getSubBlockFor(self.blocks[i])
+        }
+        
+        self.blocks = newBlocks
+    }
+    
+    mutating func subBitsInvers() {
+        var newBlocks = [UInt8]()
+        
+        for i in 0...(self.blocks.count - 1) {
+            newBlocks[i] = BlockSupplantHelper.getInvSubBlockFor(self.blocks[i])
+        }
+        
+        self.blocks = newBlocks
+    }
+    
     mutating func shiftRows() {
-        var newBlocks = [Data]()
+        var newBlocks = [UInt8]()
         
         let n = self.blocks.count
         
         for _ in 1...n {
-            newBlocks.append(Data())
+            newBlocks.append(UInt8())
         }
         
         
@@ -70,17 +90,16 @@ struct Matrix {
             }
         }
         
-        
         self.blocks = newBlocks
     }
     
     mutating func shiftRowsInvers() {
-        var newBlocks = [Data]()
+        var newBlocks = [UInt8]()
         
         let n = self.blocks.count
         
         for _ in 1...n {
-            newBlocks.append(Data())
+            newBlocks.append(UInt8())
         }
         
         for o in 0...3 {
@@ -100,7 +119,77 @@ struct Matrix {
     func mixColumsInvers() {
         //TODO: Implementieren
     }
+}
+
+struct MatrixHelper {
     
+    static func multiplyMatrixWithVector(matrix: [[UInt8]], vector: [UInt8]) throws -> [UInt8] {
+        
+        // Check compatibility of matrix and vector
+        
+        let m0Count = matrix[0].count
+        
+        if (m0Count != vector.count) {
+            throw MatrixError.IncompatibleMultiplicationError
+        }
+        
+        for m in 1..<matrix.count {
+            if matrix[m].count != m0Count {
+                throw MatrixError.IncompatibleMultiplicationError
+            }
+        }
+        
+        // Calculate product matrixs
+        
+        var restultMatrix = [UInt8]()
+        for n in 0..<m0Count {
+            restultMatrix.append(UInt8(n))
+        }
+        
+        for i in 0..<matrix.count {
+            print("i: \(i)")
+            var rowResult: UInt8 = 0
+            
+            for j in 0..<matrix.count {
+                print(" j: \(j)")
+                rowResult += matrix[i][j] * vector[j]
+            }
+            restultMatrix[i] = rowResult
+        }
+        
+        return restultMatrix
+    }
+    
+    static func intAsBinaryArray(_ i: UInt8, minLength: Int = 0, lastReturn: Bool = true) -> [UInt8] {
+    
+        var result = [UInt8]()
+        
+        if(i > 0) {
+            result.append(UInt8(i % 2))
+            if (i/2 > 0) {
+                result = intAsBinaryArray((i / 2), lastReturn: false) + result
+            }
+        }
+        
+        if lastReturn {
+            while (result.count < 8) {
+                result = [UInt8(0)] + result
+            }
+        }
+        
+        return result
+    }
+    
+    static func binaryArrayAsInt(_ a: [UInt8]) -> UInt8 {
+
+        var result: UInt8 = 0
+        
+        for i in 0..<a.count {
+            result += UInt8(powl(2, Double(a.count - (i+1)))) * a[i]
+        }
+        
+        return result
+    }
 }
 
 enum MatrixType {
