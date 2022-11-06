@@ -26,7 +26,7 @@ struct Matrix {
     +--+--+--+--+
     */
     
-    var blocks = [Data]()
+    var blocks = [Block]()
     let typ: MatrixType
     
     func getTyp() -> MatrixType {
@@ -40,7 +40,7 @@ struct Matrix {
     func asConsoleString() -> String {
         let s = """
         +--+--+--+--+
-        |\(self.blocks[0])|\(self.blocks[4])|\(self.blocks[8])|\(self.blocks[12])|
+        |\(self.blocks[0].value)|\(self.blocks[4])|\(self.blocks[8])|\(self.blocks[12])|
         +--+--+--+--+
         |\(self.blocks[1])|\(self.blocks[5])|\(self.blocks[9])|\(self.blocks[13])|
         +--+--+--+--+
@@ -53,24 +53,32 @@ struct Matrix {
         return s
     }
     
-    mutating func subBits() {
-        var newBlocks = [UInt8]()
+    mutating func updateBlocks(_ newBlocks: [UInt8]) {
         
-        for i in 0...(self.blocks.count - 1) {
-            newBlocks[i] = BlockSupplantHelper.getSubBlockFor(self.blocks[i])
+        for j in 0..<self.blocks.count {
+            self.blocks[j].value = newBlocks[j]
         }
-        
-        self.blocks = newBlocks
     }
     
-    mutating func subBitsInvers() {
+    mutating func subBits() throws {
         var newBlocks = [UInt8]()
         
         for i in 0...(self.blocks.count - 1) {
-            newBlocks[i] = BlockSupplantHelper.getInvSubBlockFor(self.blocks[i])
+            try newBlocks[i] = BlockSupplantHelper.getSubBlockFor(self.blocks[i].value)
         }
         
-        self.blocks = newBlocks
+        updateBlocks(newBlocks)
+        
+    }
+    
+    mutating func subBitsInvers() throws{
+        var newBlocks = [UInt8]()
+        
+        for i in 0...(self.blocks.count - 1) {
+            try newBlocks[i] = BlockSupplantHelper.getInvSubBlockFor(self.blocks[i].value)
+        }
+        
+        updateBlocks(newBlocks)
     }
     
     mutating func shiftRows() {
@@ -86,11 +94,11 @@ struct Matrix {
         for o in 0...3 {
             // Shift row 0 : 0->3
             for r in 0...((n / 4) - 1) {
-                newBlocks[((r*4+(o*1))+(n-(o*4))) % n] = self.blocks[r*4+(o*1)]
+                newBlocks[((r*4+(o*1))+(n-(o*4))) % n] = self.blocks[r*4+(o*1)].value
             }
         }
         
-        self.blocks = newBlocks
+        updateBlocks(newBlocks)
     }
     
     mutating func shiftRowsInvers() {
@@ -105,16 +113,20 @@ struct Matrix {
         for o in 0...3 {
             // Shift Row 1
             for r in 0...((n / 4) - 1) {
-                newBlocks[r*4+(o*1)] = self.blocks[((r*4+(o*1))+(n-(o*4))) % n]
+                newBlocks[r*4+(o*1)] = self.blocks[((r*4+(o*1))+(n-(o*4))) % n].value
             }
         }
         
-        self.blocks = newBlocks
+        updateBlocks(newBlocks)
     }
     
-    func mixColums() {
+    mutating func mixColums() {
         
-        var result = blocks
+        var result = [UInt8]()
+        
+        for i in 0...(self.blocks.count - 1) {
+            result.append(UInt8())
+        }
         
         let m: [[UInt8]] = [
         [2,3,1,1],
@@ -127,15 +139,15 @@ struct Matrix {
             
             var vector = [UInt8]()
             
-            vector.append(self.blocks[(i * 1 + 0) % self.blocks.count])
-            vector.append(self.blocks[(i * 1 + 4) % self.blocks.count])
-            vector.append(self.blocks[(i * 1 + 8) % self.blocks.count])
-            vector.append(self.blocks[(i * 1 + 12) % self.blocks.count])
+            vector.append(self.blocks[(i * 1 + 0) % self.blocks.count].value)
+            vector.append(self.blocks[(i * 1 + 4) % self.blocks.count].value)
+            vector.append(self.blocks[(i * 1 + 8) % self.blocks.count].value)
+            vector.append(self.blocks[(i * 1 + 12) % self.blocks.count].value)
             
             var newColum = [UInt8]()
                     
             do {
-                try newColum = self.multiplyMatrixWithVectorMod(matrix: m, vector: vector, modul: 256)
+                try newColum = MatrixHelper.multiplyMatrixWithVectorMod(matrix: m, vector: vector, modul: 256)
             } catch {
                 //TODO:
             }
@@ -147,12 +159,16 @@ struct Matrix {
             
         }
         
-        return result
+        updateBlocks(result)
     }
 
-    func mixColumsInv() {
+    mutating func mixColumsInv() {
         
-        var result = blocks
+        var result = [UInt8]()
+        
+        for _ in 0...(self.blocks.count - 1) {
+            result.append(UInt8())
+        }
         
         let m: [[UInt8]] = [
     //    [2,3,1,1],
@@ -170,16 +186,16 @@ struct Matrix {
             
             var vector = [UInt8]()
             
-            vector.append(self.blocks[(i * 1 + 0) % self.blocks.count])
-            vector.append(self.blocks[(i * 1 + 4) % self.blocks.count])
-            vector.append(self.blocks[(i * 1 + 8) % self.blocks.count])
-            vector.append(self.blocks[(i * 1 + 12) % self.blocks.count])
+            vector.append(self.blocks[(i * 1 + 0) % self.blocks.count].value)
+            vector.append(self.blocks[(i * 1 + 4) % self.blocks.count].value)
+            vector.append(self.blocks[(i * 1 + 8) % self.blocks.count].value)
+            vector.append(self.blocks[(i * 1 + 12) % self.blocks.count].value)
             
             var newColum = [UInt8]()
             
             
             do {
-                try newColum = self.multiplyMatrixWithVectorMod(matrix: m, vector: vector, modul: 256)
+                try newColum = MatrixHelper.multiplyMatrixWithVectorMod(matrix: m, vector: vector, modul: 256)
             } catch {
                 //TODO:
             }
@@ -191,7 +207,7 @@ struct Matrix {
             
         }
         
-        return result
+        updateBlocks(result)
     }
 }
 
