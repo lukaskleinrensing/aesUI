@@ -21,7 +21,7 @@ struct MatrixView: View {
             ZStack{
                 RoundedRectangle(cornerRadius: 10).fill(.gray)
                 LazyHGrid(rows: rows, spacing: 10) {
-                    ForEach(model.array) { block in
+                    ForEach(model.array.blocks) { block in
                         BlockView(block: block)
                             .frame(width: geo.size.width / 4 )
 
