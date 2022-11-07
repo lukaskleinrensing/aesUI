@@ -17,13 +17,13 @@ struct MatrixView: View {
         ]
 
     var body: some View {
-        GeometryReader{ geo in
+        GeometryReader { geo in
             ZStack{
                 RoundedRectangle(cornerRadius: 10).fill(.gray)
                 LazyHGrid(rows: rows, spacing: 10) {
-                    ForEach(model.array.blocks) { block in
+                    ForEach(model.array.blocks, id: \.self) { block in
                         BlockView(block: block)
-                            .frame(width: geo.size.width / 4 )
+                            .frame(minWidth: 50, maxWidth: geo.size.width / 4 )
 
                     }
                 }

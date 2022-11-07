@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Block: Identifiable {
+struct Block: Identifiable, Hashable {
     let id: UUID
     var value: UInt8
     var text: String {
