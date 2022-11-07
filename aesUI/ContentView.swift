@@ -25,8 +25,9 @@ struct ContentView: View {
             }
             HStack {
                 MatrixView()
-                    .frame(width: geo.size.width * 0.5)
                     .padding()
+                    .frame(width: geo.size.width * 0.5)
+
                 Spacer()
                 VStack {
                     Picker("", selection: $model.selectedBitType) {

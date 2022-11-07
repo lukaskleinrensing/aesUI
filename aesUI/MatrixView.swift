@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct MatrixView: View {
+
+    var blockCount: Int {
+        return model.matrixBlockCount / 4
+    }
+
     @EnvironmentObject var model: Model
     let rows = [
             GridItem(.flexible(minimum: 20)),
@@ -23,7 +28,7 @@ struct MatrixView: View {
                 LazyHGrid(rows: rows, spacing: 10) {
                     ForEach(model.array.blocks, id: \.self) { block in
                         BlockView(block: block)
-                            .frame(minWidth: 50, maxWidth: geo.size.width / 4 )
+                            .frame(width: (geo.size.width / CGFloat(blockCount)) - 10 )
 
                     }
                 }

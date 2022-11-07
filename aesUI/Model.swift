@@ -51,7 +51,12 @@ class Model: ObservableObject {
     @Published var roundKeys = Array<String>()
 
     @Published var animationSpeed = 1.0
-    @Published var selectedBitType = MatrixType.bit128
+    @Published var selectedBitType = MatrixType.bit128 {
+        didSet {
+            textToMatrix()
+        }
+    }
+    @Published var selectedBlocks = Set<UUID>()
 
 
     init(text: String = "") {
@@ -81,7 +86,7 @@ class Model: ObservableObject {
 
     func nextState() {
         self.isCalculating = true
-        withAnimation(){
+        withAnimation(.easeInOut(duration: animationSpeed)){
             switch self.state {
             case .plaintext:
                 // Verschlüsselung
