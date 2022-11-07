@@ -86,7 +86,7 @@ class Model: ObservableObject {
 
     func nextState() {
         self.isCalculating = true
-        withAnimation(.easeInOut(duration: animationSpeed)){
+//        withAnimation(.easeInOut(duration: animationSpeed)){
             switch self.state {
             case .plaintext:
                 // Verschlüsselung
@@ -147,13 +147,16 @@ class Model: ObservableObject {
             case .mixColumns:
                 // Verschlüsselung
                 if self.encrypt {
-                    self.array.mixColums()
+                    withAnimation(.easeInOut(duration: animationSpeed)){
+                        self.array.mixColums()
+                    }
                     
                     self.state = .key
                 } // Entschlüsselung
                 else {
-                    self.array.mixColumsInv()
-                    
+                    withAnimation(.easeInOut(duration: animationSpeed)){
+                        self.array.mixColumsInv()
+                    }
                     self.state = .shiftRows
                 }
             case .key:
@@ -185,7 +188,7 @@ class Model: ObservableObject {
 //            default:
 //                self.state = .waiting
             }
-        }
+//        }
         self.isCalculating = false
     }
     func resetState() {

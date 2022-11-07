@@ -11,6 +11,18 @@ struct ContentView: View {
 
     @EnvironmentObject var model: Model
     @State var showingAlert = false
+
+    var matrixSizeMultiplyer: CGFloat {
+        let blockCount = model.matrixBlockCount / 4
+
+        if blockCount == 4 {
+            return 0.5
+        }
+        if blockCount == 6 {
+            return 0.6
+        }
+        return 0.65
+    }
     
     var body: some View {
         GeometryReader { geo in
@@ -24,10 +36,13 @@ struct ContentView: View {
 
             }
             HStack {
-                MatrixView()
-                    .padding()
-                    .frame(width: geo.size.width * 0.5)
-
+                VStack{
+                    MatrixView()
+                        .padding()
+                        .frame(width: geo.size.width * matrixSizeMultiplyer)
+                    Slider(value: $model.animationSpeed, in: 0...10)
+                    Text("AnimationSpeed \(model.animationSpeed, specifier: "%.1f") Sekunden")
+                }
                 Spacer()
                 VStack {
                     Picker("", selection: $model.selectedBitType) {
@@ -36,7 +51,9 @@ struct ContentView: View {
                         Text("256 Bit").tag(MatrixType.bit256)
                         
                     }.pickerStyle(SegmentedPickerStyle())
-                        .frame(width: geo.size.width * 0.5)
+                        .padding(.trailing)
+                        .frame(width: geo.size.width * 0.3)
+
                     
                     HStack {
                         VStack {
@@ -102,8 +119,6 @@ struct ContentView: View {
                                 Button(action: model.resetState, label: {Text("resetState").frame(width:100)})
                                 Button(action: model.testmove, label: {Text("moveTiles").frame(width:100)})
                                 Button(action: model.matrixToText , label: {Text("matrixToResult").frame(width:100)})
-                                Slider(value: $model.animationSpeed, in: 0...10)
-                                Text("AnimationSpeed \(model.animationSpeed, specifier: "%.1f") Sekunden")
                             }
                         }
 
