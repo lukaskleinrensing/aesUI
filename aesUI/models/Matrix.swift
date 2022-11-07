@@ -70,6 +70,14 @@ struct Matrix {
         }
     }
     
+    mutating func updateBlocks(_ newBlocks: [Block]) {
+        
+        for j in 0..<self.blocks.count {
+            self.blocks[j].value = newBlocks[j].value
+            self.blocks[j].id = newBlocks[j].id
+        }
+    }
+    
     mutating func subBits() throws {
         var newBlocks = emptyArrayOfBlocks(self.blocks.count)
                 
@@ -93,19 +101,20 @@ struct Matrix {
     
     mutating func shiftRows() {
         
-        var newBlocks = [UInt8]()
+        var newBlocks = [Block]()
         
         let n = self.blocks.count
         
         for _ in 1...n {
-            newBlocks.append(UInt8())
+            newBlocks.append(Block(UInt8(0)))
         }
         
         
         for o in 0...3 {
             // Shift row 0 : 0->3
             for r in 0...((n / 4) - 1) {
-                newBlocks[((r*4+(o*1))+(n-(o*4))) % n] = self.blocks[r*4+(o*1)].value
+                newBlocks[((r*4+(o*1))+(n-(o*4))) % n].value = self.blocks[r*4+(o*1)].value
+                newBlocks[((r*4+(o*1))+(n-(o*4))) % n].id = self.blocks[r*4+(o*1)].id
             }
         }
         
@@ -320,7 +329,7 @@ struct MatrixHelper {
         var result: UInt8 = 0
         
         for i in 0..<a.count {
-            result += UInt8(powl(2, Float80(Double(a.count - (i+1))))) * a[i]
+            result += UInt8(powl(2, Double(a.count - (i+1)))) * a[i]
         }
         
         return result
