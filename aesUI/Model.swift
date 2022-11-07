@@ -115,11 +115,11 @@ class Model: ObservableObject {
             case .subByte:
                 // Verschlüsselung
                 if self.encrypt {
-                    do {
-                        try self.array.subBits()
-                    } catch {
-                        break
+
+                    withAnimation(.interpolatingSpring(stiffness: 50, damping: 1)){
+                        subBits()
                     }
+
                     
                     self.state = .shiftRows
                 } // Entschlüsselung
@@ -236,5 +236,13 @@ class Model: ObservableObject {
         print("Result: \(mText)")
         
         self.result = mText
+    }
+
+    func subBits() {
+        do {
+            try self.array.subBits()
+        } catch  {
+            print("Fehler")
+        }
     }
 }
