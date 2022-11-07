@@ -22,9 +22,14 @@ struct BlockView: View {
             } else {
                 RoundedRectangle(cornerRadius: 10)
             }
-            Text(block.text)
-                .font(.title)
-                .foregroundColor(.black)
+            VStack{
+                Text(block.text)
+                    .font(.title)
+                    .foregroundColor(.black)
+                Text(block.history?.description ?? "")
+                    .foregroundColor(.black)
+                    .padding()
+            }
         }
         .onTapGesture {
             if model.selectedBlocks.contains(block.id) {

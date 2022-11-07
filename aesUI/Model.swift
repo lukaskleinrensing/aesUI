@@ -115,12 +115,9 @@ class Model: ObservableObject {
             case .subByte:
                 // Verschlüsselung
                 if self.encrypt {
-
-                    withAnimation(.interpolatingSpring(stiffness: 50, damping: 1)){
+                    withAnimation(){
                         subBits()
                     }
-
-                    
                     self.state = .shiftRows
                 } // Entschlüsselung
                 else {
@@ -135,26 +132,28 @@ class Model: ObservableObject {
             case .shiftRows:
                 // Verschlüsselung
                 if self.encrypt {
-                    self.array.shiftRows()
-                    
+                    withAnimation(.easeInOut(duration: animationSpeed)){
+                        self.array.shiftRows()
+                    }
                     self.state = .mixColumns
                 } // Entschlüsselung
                 else {
-                    self.array.shiftRowsInvers()
-                    
+                    withAnimation(.easeInOut(duration: animationSpeed)){
+                        self.array.shiftRowsInvers()
+                    }
                     self.state = .subByte
                 }
             case .mixColumns:
                 // Verschlüsselung
                 if self.encrypt {
-                    withAnimation(.easeInOut(duration: animationSpeed)){
+                    withAnimation(){
                         self.array.mixColums()
                     }
                     
                     self.state = .key
                 } // Entschlüsselung
                 else {
-                    withAnimation(.easeInOut(duration: animationSpeed)){
+                    withAnimation(){
                         self.array.mixColumsInv()
                     }
                     self.state = .shiftRows

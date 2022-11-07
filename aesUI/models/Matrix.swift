@@ -66,6 +66,7 @@ struct Matrix {
     mutating func updateBlocks(_ newBlocks: [UInt8]) {
         
         for j in 0..<self.blocks.count {
+            self.blocks[j].history = self.blocks[j].value
             self.blocks[j].value = newBlocks[j]
         }
     }
@@ -75,6 +76,7 @@ struct Matrix {
         for j in 0..<self.blocks.count {
             self.blocks[j].value = newBlocks[j].value
             self.blocks[j].id = newBlocks[j].id
+            self.blocks[j].history = newBlocks[j].history
         }
     }
     
@@ -115,6 +117,7 @@ struct Matrix {
             for r in 0...((n / 4) - 1) {
                 newBlocks[((r*4+(o*1))+(n-(o*4))) % n].value = self.blocks[r*4+(o*1)].value
                 newBlocks[((r*4+(o*1))+(n-(o*4))) % n].id = self.blocks[r*4+(o*1)].id
+                newBlocks[((r*4+(o*1))+(n-(o*4))) % n].history = self.blocks[r*4+(o*1)].history
             }
         }
         

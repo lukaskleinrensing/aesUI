@@ -14,15 +14,18 @@ struct Block: Identifiable, Hashable {
     var text: String {
         return value.description
     }
+    var history: UInt8?
 
     init(_ value: UInt8){
         self.value = value
         self.id = UUID()
     }
-    init(value: UInt8, id: UUID){
+    init(value: UInt8, id: UUID, history: UInt8){
         self.value = value
         self.id = id
+        self.history = history
     }
+
 }
 
 
