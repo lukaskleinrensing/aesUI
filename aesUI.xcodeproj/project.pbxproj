@@ -27,6 +27,7 @@
 		B014D896291717A600D41787 /* BlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014D895291717A600D41787 /* BlockView.swift */; };
 		B014D8982917184A00D41787 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014D8972917184A00D41787 /* Block.swift */; };
 		B014D89A291727F400D41787 /* StateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014D899291727F400D41787 /* StateView.swift */; };
+		B014D89E291F1A4C00D41787 /* Encoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014D89D291F1A4C00D41787 /* Encoding.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,7 @@
 		B014D895291717A600D41787 /* BlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockView.swift; sourceTree = "<group>"; };
 		B014D8972917184A00D41787 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		B014D899291727F400D41787 /* StateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateView.swift; sourceTree = "<group>"; };
+		B014D89D291F1A4C00D41787 /* Encoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encoding.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 			children = (
 				0186AFEF2915BF60009E7518 /* Matrix.swift */,
 				0186AFF12915D9D3009E7518 /* BlockSupplantHelper.swift */,
+				B014D89D291F1A4C00D41787 /* Encoding.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 				0186AFF02915BF60009E7518 /* Matrix.swift in Sources */,
 				0186AFF22915D9D3009E7518 /* BlockSupplantHelper.swift in Sources */,
 				01BB7C6E2915BA60009F5569 /* aesUI.xcdatamodeld in Sources */,
+				B014D89E291F1A4C00D41787 /* Encoding.swift in Sources */,
 				B014D89029168FF800D41787 /* MatrixView.swift in Sources */,
 				B00572E92915D31A00DD75AC /* Extension_String.UTF8View.Element.swift in Sources */,
 				B014D89A291727F400D41787 /* StateView.swift in Sources */,
