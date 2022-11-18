@@ -219,7 +219,7 @@ class Model: ObservableObject {
         }
         
         for i in 0..<textArray.count {
-            self.array.blocks[i].value = UInt8(Array(textArray[i].utf8.lazy.map { Int($0) })[0])
+            self.array.blocks[i].value = UInt8(PhilippsEncoding.CharToBase[Character(textArray[i])] ?? 0)
         }
     }
     //MARK: MatrixToText
