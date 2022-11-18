@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct Encoding {
-    let BaseToCharacter = [
+struct PhilippsEncoding {
+    static let BaseToCharacter = [
         0 : Character("a"),
         1 : Character("b"),
         2 : Character("c"),
@@ -266,7 +266,7 @@ struct Encoding {
         254 : Character(" ")
     ]
 
-    let CharToBase = [
+    static let CharToBase = [
         Character("a") : 0,
         Character("b") : 1,
         Character("c") : 2,

@@ -332,7 +332,7 @@ struct MatrixHelper {
         var result: UInt8 = 0
         
         for i in 0..<a.count {
-            result += UInt8(powl(2, Float80(Double(a.count - (i+1))))) * a[i]
+            result += UInt8(powl(2, Double(a.count - (i+1)))) * a[i]
         }
         
         return result

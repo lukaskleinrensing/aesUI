@@ -61,7 +61,7 @@ class Model: ObservableObject {
 
     init(text: String = "") {
         
-        var blocks = [Block]()
+        let blocks = [Block]()
 //        for i in 0...15 {
 //            blocks.append(Block(UInt8(i)))
 //        }
@@ -228,10 +228,7 @@ class Model: ObservableObject {
         var mText = ""
         
         for i in 0..<self.array.blocks.count {
-            let data = Data(base64Encoded: withUnsafeBytes(of: Int(self.array.blocks[i].value)) { Data($0) })
-
-            mText += String(data: data!, encoding: .utf8) ?? ""
-            print("Data: \"\(data)\", als String: \"\(String(data: data!, encoding: .utf8)!)\"")
+            mText = mText + String(PhilippsEncoding.BaseToCharacter[Int(self.array.blocks[i].value)] ?? Character(""))
         }
         print("Result: \(mText)")
         
