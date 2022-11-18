@@ -110,9 +110,9 @@ class Model: ObservableObject {
             case .subByte:
                 // Verschlüsselung
                 if self.encrypt {
-                    withAnimation(){
+
                         subBits()
-                    }
+
                     self.state = .shiftRows
                 } // Entschlüsselung
                 else {
@@ -146,16 +146,16 @@ class Model: ObservableObject {
             case .mixColumns:
                 // Verschlüsselung
                 if self.encrypt {
-                    withAnimation(){
+
                         self.array.mixColums()
-                    }
+
                     
                     self.state = .key
                 } // Entschlüsselung
                 else {
-                    withAnimation(){
+
                         self.array.mixColumsInv()
-                    }
+                    
                     self.state = .shiftRows
                 }
             case .key:
