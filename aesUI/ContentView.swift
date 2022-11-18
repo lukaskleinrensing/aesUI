@@ -28,10 +28,10 @@ struct ContentView: View {
         GeometryReader { geo in
         VStack {
             HStack {
-                TextField("Klartext", text: self.$model.text)
+                TextField(self.model.encrypt ? "Klartext" : "Chiffrat", text: self.$model.text)
                     .font(.system(size: 20))
                     .onSubmit {model.textToMatrix()
-                        model.state = .roundKey
+                        self.model.state = self.model.encrypt ? .roundKey : .key
                     }
 
             }
@@ -82,6 +82,7 @@ struct ContentView: View {
                                         .fill(self.model.array.blocks.count > 0 ? Color.blue : Color.gray))
                                 }).disabled(self.model.array.blocks.count == 0 || !self.model.result.isEmpty)
                                 Button(action: {self.model.encrypt.toggle()
+                                    self.model.state = self.model.encrypt ? .plaintext : .ciphertext
                                 }, label:{
                                     Image(systemName: self.model.encrypt ? "lock.open" : "lock")
                                         .padding()
@@ -139,7 +140,7 @@ struct ContentView: View {
             }
             TextField("Schlüssel", text: self.$model.key)
                 .font(.system(size: 20))
-            TextField("Ergebnis", text: self.$model.result)
+            TextField(self.model.encrypt ? "Chiffrat" : "Klartext", text: self.$model.result)
                 .font(.system(size: 20))
 
         }

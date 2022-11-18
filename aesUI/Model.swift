@@ -97,6 +97,7 @@ class Model: ObservableObject {
                 } // Entschlüsselung
                 else {
                     self.state = .plaintext
+                    self.matrixToText()
                 }
             case .roundKey:
                 // Verschlüsselung
@@ -104,13 +105,7 @@ class Model: ObservableObject {
                     self.state = .subByte
                 } // Entschlüsselung
                 else {
-                    if self.maxRounds == self.roundCount {
-                        self.state = .plaintext
-                    } else {
-                        self.roundCount += 1
-                        print(self.roundCount)
-                        self.state = .key
-                    }
+                    self.state = .plaintext
                 }
             case .subByte:
                 // Verschlüsselung
@@ -126,8 +121,13 @@ class Model: ObservableObject {
                     } catch {
                         break
                     }
-                    
-                    self.state = .roundKey
+                    if self.maxRounds == self.roundCount {
+                        self.state = .plaintext
+                    } else {
+                        self.roundCount += 1
+                        print(self.roundCount)
+                        self.state = .key
+                    }
                 }
             case .shiftRows:
                 // Verschlüsselung
@@ -166,7 +166,7 @@ class Model: ObservableObject {
                     } else {
                         self.roundCount += 1
                         print(self.roundCount)
-                        self.state = .roundKey
+                        self.state = .subByte
                     }
                 } // Entschlüsselung
                 else {
@@ -228,7 +228,7 @@ class Model: ObservableObject {
         var mText = ""
         
         for i in 0..<self.array.blocks.count {
-            mText = mText + String(PhilippsEncoding.BaseToCharacter[Int(self.array.blocks[i].value)] ?? Character(""))
+            mText = mText + String(PhilippsEncoding.BaseToCharacter[Int(self.array.blocks[i].value)] ?? Character(" "))
         }
         print("Result: \(mText)")
         

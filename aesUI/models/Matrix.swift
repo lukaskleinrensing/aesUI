@@ -94,6 +94,10 @@ struct Matrix {
     mutating func subBitsInvers() throws{
         var newBlocks = [UInt8]()
         
+        for _ in 0...(self.blocks.count - 1) {
+            newBlocks.append(UInt8(0))
+        }
+        
         for i in 0...(self.blocks.count - 1) {
             try newBlocks[i] = BlockSupplantHelper.getInvSubBlockFor(self.blocks[i].value)
         }
