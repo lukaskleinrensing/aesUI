@@ -68,11 +68,6 @@ class Model: ObservableObject {
         
         self.text = text
         self.array = Matrix(blocks: blocks, typ: MatrixType.bit128)
-        
-        self.roundKeys.append("test")
-        self.roundKeys.append("test")
-
-
     }
 
     func testmove() {

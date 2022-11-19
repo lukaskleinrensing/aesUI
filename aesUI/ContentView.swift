@@ -96,7 +96,7 @@ struct ContentView: View {
                                         .background(Circle()
                                         .fill(Color.red))
                                 }).disabled(self.model.array.blocks.count == 0)
-                                    .alert("Important message", isPresented: $showingAlert) {
+                                    .alert("Es werden alle aktuellen Werte und Ergebnisse gelöscht. Fortfahren?", isPresented: $showingAlert) {
                                         Button("Okay") {self.showingAlert = false
                                             self.model.resetApp()} //TODO: Implement reseting matrix and roundCount }
                                         Button(action: {self.showingAlert = false}, label: {Text("Cancel").foregroundColor(.red)})
@@ -128,12 +128,15 @@ struct ContentView: View {
                     Spacer()
 
                     VStack {
+                        Spacer()
                         Text("Rundenschlüssel:")
                             .font(.title)
                         ForEach( model.roundKeys, id: \.self){ key in
                             Text(key)
                                 .font(.system(size: 15))
                         }
+                        
+                        Spacer()
 
                     }
                 }
