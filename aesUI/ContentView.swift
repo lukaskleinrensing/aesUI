@@ -97,7 +97,8 @@ struct ContentView: View {
                                         .fill(Color.red))
                                 }).disabled(self.model.array.blocks.count == 0)
                                     .alert("Important message", isPresented: $showingAlert) {
-                                        Button("Okay") {self.showingAlert = false} //TODO: Implement reseting matrix and roundCount }
+                                        Button("Okay") {self.showingAlert = false
+                                            self.model.resetApp()} //TODO: Implement reseting matrix and roundCount }
                                         Button(action: {self.showingAlert = false}, label: {Text("Cancel").foregroundColor(.red)})
                                 }
                             }
