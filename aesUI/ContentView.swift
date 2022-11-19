@@ -104,25 +104,25 @@ struct ContentView: View {
                             }
                         }
 
-                        VStack (alignment: .trailing){
-                            Button(action: model.textToMatrix, label: {Text("loadMatrix").frame(width: 100)})
-                                .buttonStyle(.bordered)
-                            Button(action: {}, label: {Text("encrypt").frame(width: 100)})
-                                .buttonStyle(.bordered)
-                            Button(action: {}, label: {Text("decrpyt").frame(width: 100)})
-                                .buttonStyle(.bordered)
-                            Button(action: {}, label: {Text("Step").frame(width: 100)})
-                            .buttonStyle(.bordered)
-
-                            VStack (alignment: .trailing){
-                                Text("Debug Buttons")
-                                    .padding(.top)
-                                Button(action: model.nextState, label: {Text("nextState").frame(width:100)})
-                                Button(action: model.resetState, label: {Text("resetState").frame(width:100)})
-                                Button(action: model.testmove, label: {Text("moveTiles").frame(width:100)})
-                                Button(action: model.matrixToText , label: {Text("matrixToResult").frame(width:100)})
-                            }
-                        }
+//                        VStack (alignment: .trailing){
+//                            Button(action: model.textToMatrix, label: {Text("loadMatrix").frame(width: 100)})
+//                                .buttonStyle(.bordered)
+//                            Button(action: {}, label: {Text("encrypt").frame(width: 100)})
+//                                .buttonStyle(.bordered)
+//                            Button(action: {}, label: {Text("decrpyt").frame(width: 100)})
+//                                .buttonStyle(.bordered)
+//                            Button(action: {}, label: {Text("Step").frame(width: 100)})
+//                            .buttonStyle(.bordered)
+//
+//                            VStack (alignment: .trailing){
+//                                Text("Debug Buttons")
+//                                    .padding(.top)
+//                                Button(action: model.nextState, label: {Text("nextState").frame(width:100)})
+//                                Button(action: model.resetState, label: {Text("resetState").frame(width:100)})
+//                                Button(action: model.testmove, label: {Text("moveTiles").frame(width:100)})
+//                                Button(action: model.matrixToText , label: {Text("matrixToResult").frame(width:100)})
+//                            }
+//                        }
 
                     }
                     Spacer()
