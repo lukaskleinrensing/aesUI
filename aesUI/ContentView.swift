@@ -96,43 +96,47 @@ struct ContentView: View {
                                         .background(Circle()
                                         .fill(Color.red))
                                 }).disabled(self.model.array.blocks.count == 0)
-                                    .alert("Important message", isPresented: $showingAlert) {
-                                        Button("Okay") {self.showingAlert = false} //TODO: Implement reseting matrix and roundCount }
+                                    .alert("Es werden alle aktuellen Werte und Ergebnisse gelöscht. Fortfahren?", isPresented: $showingAlert) {
+                                        Button("Okay") {self.showingAlert = false
+                                            self.model.resetApp()} //TODO: Implement reseting matrix and roundCount }
                                         Button(action: {self.showingAlert = false}, label: {Text("Cancel").foregroundColor(.red)})
                                 }
                             }
                         }
 
-                        VStack (alignment: .trailing){
-                            Button(action: model.textToMatrix, label: {Text("loadMatrix").frame(width: 100)})
-                                .buttonStyle(.bordered)
-                            Button(action: {}, label: {Text("encrypt").frame(width: 100)})
-                                .buttonStyle(.bordered)
-                            Button(action: {}, label: {Text("decrpyt").frame(width: 100)})
-                                .buttonStyle(.bordered)
-                            Button(action: {}, label: {Text("Step").frame(width: 100)})
-                            .buttonStyle(.bordered)
-
-                            VStack (alignment: .trailing){
-                                Text("Debug Buttons")
-                                    .padding(.top)
-                                Button(action: model.nextState, label: {Text("nextState").frame(width:100)})
-                                Button(action: model.resetState, label: {Text("resetState").frame(width:100)})
-                                Button(action: model.testmove, label: {Text("moveTiles").frame(width:100)})
-                                Button(action: model.matrixToText , label: {Text("matrixToResult").frame(width:100)})
-                            }
-                        }
+//                        VStack (alignment: .trailing){
+//                            Button(action: model.textToMatrix, label: {Text("loadMatrix").frame(width: 100)})
+//                                .buttonStyle(.bordered)
+//                            Button(action: {}, label: {Text("encrypt").frame(width: 100)})
+//                                .buttonStyle(.bordered)
+//                            Button(action: {}, label: {Text("decrpyt").frame(width: 100)})
+//                                .buttonStyle(.bordered)
+//                            Button(action: {}, label: {Text("Step").frame(width: 100)})
+//                            .buttonStyle(.bordered)
+//
+//                            VStack (alignment: .trailing){
+//                                Text("Debug Buttons")
+//                                    .padding(.top)
+//                                Button(action: model.nextState, label: {Text("nextState").frame(width:100)})
+//                                Button(action: model.resetState, label: {Text("resetState").frame(width:100)})
+//                                Button(action: model.testmove, label: {Text("moveTiles").frame(width:100)})
+//                                Button(action: model.matrixToText , label: {Text("matrixToResult").frame(width:100)})
+//                            }
+//                        }
 
                     }
                     Spacer()
 
                     VStack {
+                        Spacer()
                         Text("Rundenschlüssel:")
                             .font(.title)
                         ForEach( model.roundKeys, id: \.self){ key in
                             Text(key)
                                 .font(.system(size: 15))
                         }
+                        
+                        Spacer()
 
                     }
                 }

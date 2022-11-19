@@ -68,11 +68,6 @@ class Model: ObservableObject {
         
         self.text = text
         self.array = Matrix(blocks: blocks, typ: MatrixType.bit128)
-        
-        self.roundKeys.append("test")
-        self.roundKeys.append("test")
-
-
     }
 
     func testmove() {
@@ -241,5 +236,20 @@ class Model: ObservableObject {
         } catch  {
             print("Fehler")
         }
+    }
+    
+    func resetApp() {
+        self.text = ""
+        self.result = ""
+        self.roundCount = 0
+        
+        let blocks = [Block]()
+        self.array = Matrix(blocks: blocks, typ: self.array.typ)
+        self.state = self.encrypt ? .plaintext : .ciphertext
+        
+        self.roundKeys.removeAll()
+        self.selectedBlocks.removeAll()
+        
+        
     }
 }

@@ -18,6 +18,8 @@ struct StateView: View {
                 Image(systemName: self.model.encrypt ? "arrow.down" : "arrow.up")
                 StateElement(name: "Rundenschlüssel", state: Model.operationState.roundKey)
                 Image(systemName: self.model.encrypt ? "arrow.down" : "arrow.up")
+            }
+            VStack {
                 StateElement(name: "Sub Byte", state: Model.operationState.subByte)
                 Image(systemName: self.model.encrypt ? "arrow.down" : "arrow.up")
                 StateElement(name: "Shift Rows", state: Model.operationState.shiftRows)
