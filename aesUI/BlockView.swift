@@ -13,6 +13,7 @@ struct BlockView: View {
     var isMarked: Bool {
         return model.selectedBlocks.contains(block.id)
     }
+    
 
     var body: some View {
         ZStack{
@@ -26,10 +27,13 @@ struct BlockView: View {
                 Text(block.text)
                     .font(.title)
                     .foregroundColor(.black)
+                    .animation(model.state == Model.operationState.shiftRows ? .none: .spring() )
                 Text(block.history?.description ?? "")
                     .foregroundColor(.black)
                     .padding()
+                
             }
+
         }
         .onTapGesture {
             if model.selectedBlocks.contains(block.id) {

@@ -29,6 +29,8 @@
 		B014D8982917184A00D41787 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014D8972917184A00D41787 /* Block.swift */; };
 		B014D89A291727F400D41787 /* StateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014D899291727F400D41787 /* StateView.swift */; };
 		B014D89E291F1A4C00D41787 /* Encoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014D89D291F1A4C00D41787 /* Encoding.swift */; };
+		B09FCB77292A5FC2002D834A /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09FCB76292A5FC2002D834A /* KeyView.swift */; };
+		B09FCB79292A600F002D834A /* CalcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09FCB78292A600F002D834A /* CalcView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +76,8 @@
 		B014D8972917184A00D41787 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		B014D899291727F400D41787 /* StateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateView.swift; sourceTree = "<group>"; };
 		B014D89D291F1A4C00D41787 /* Encoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encoding.swift; sourceTree = "<group>"; };
+		B09FCB76292A5FC2002D834A /* KeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyView.swift; sourceTree = "<group>"; };
+		B09FCB78292A600F002D834A /* CalcView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +142,8 @@
 				0186AFEE2915BF3B009E7518 /* models */,
 				01BB7C612915BA5E009F5569 /* aesUIApp.swift */,
 				01BB7C632915BA5E009F5569 /* ContentView.swift */,
+				B09FCB78292A600F002D834A /* CalcView.swift */,
+				B09FCB76292A5FC2002D834A /* KeyView.swift */,
 				B014D899291727F400D41787 /* StateView.swift */,
 				B014D88F29168FF800D41787 /* MatrixView.swift */,
 				B014D8912916915A00D41787 /* Model.swift */,
@@ -320,9 +326,11 @@
 				B014D89E291F1A4C00D41787 /* Encoding.swift in Sources */,
 				B014D89029168FF800D41787 /* MatrixView.swift in Sources */,
 				B00572E92915D31A00DD75AC /* Extension_String.UTF8View.Element.swift in Sources */,
+				B09FCB79292A600F002D834A /* CalcView.swift in Sources */,
 				B014D89A291727F400D41787 /* StateView.swift in Sources */,
 				B00572E72915C55F00DD75AC /* Extension_Array.swift in Sources */,
 				01BB7C642915BA5E009F5569 /* ContentView.swift in Sources */,
+				B09FCB77292A5FC2002D834A /* KeyView.swift in Sources */,
 				B014D896291717A600D41787 /* BlockView.swift in Sources */,
 				01AF7176292A560E00224CB4 /* Key.swift in Sources */,
 				B014D8982917184A00D41787 /* Block.swift in Sources */,

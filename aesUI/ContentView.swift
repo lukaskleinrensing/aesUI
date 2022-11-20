@@ -11,6 +11,11 @@ struct ContentView: View {
 
     @EnvironmentObject var model: Model
     @State var showingAlert = false
+    
+    enum infoMode {
+        case Key, Calculation
+    }
+    @State var infoState = infoMode.Key
 
     var matrixSizeMultiplyer: CGFloat {
         let blockCount = model.matrixBlockCount / 4
@@ -73,7 +78,7 @@ struct ContentView: View {
                                 }).disabled(self.model.array.blocks.count == 0 || !self.model.result.isEmpty)
                                 Button(action: {
                                     while(self.model.state != (self.model.encrypt ? Model.operationState.ciphertext : Model.operationState.plaintext)) {
-                                    self.model.nextState()
+                                            self.model.nextState()
                                     }
                                 }, label:{
                                     Image(systemName: "forward.fill")
@@ -127,17 +132,22 @@ struct ContentView: View {
                     }
                     Spacer()
 
-                    VStack {
-                        Spacer()
-                        Text("Rundenschlüssel:")
-                            .font(.title)
-                        ForEach( model.roundKeys, id: \.self){ key in
-                            Text(key)
-                                .font(.system(size: 15))
-                        }
-                        
-                        Spacer()
+                    Picker("", selection: self.$infoState) {
+                        Text("Rundenschlüssel").tag(infoMode.Key)
+                        Text("Berechnungen").tag(infoMode.Calculation)
+                    }.pickerStyle(SegmentedPickerStyle())
+                        .padding(.trailing)
+                        .frame(width: geo.size.width * 0.3)
+                        .padding()
 
+                    if(infoState == infoMode.Key) {
+                        KeyView()
+                            .frame(width: geo.size.width * 0.4, height: geo.size.height * 0.3)
+                            .padding()
+                    } else {
+                        CalcMixColumnsView()
+                            .frame(width: geo.size.width * 0.4, height: geo.size.height * 0.3)
+                            .padding()
                     }
                 }
 
