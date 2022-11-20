@@ -35,9 +35,15 @@ struct ContentView: View {
             HStack {
                 TextField(self.model.encrypt ? "Klartext" : "Chiffrat", text: self.$model.text)
                     .font(.system(size: 20))
-                    .onSubmit {model.textToMatrix()
-                        self.model.state = self.model.encrypt ? .roundKey : .key
-                        self.model.loadStartKeys()
+                    .onSubmit {
+                        if (self.model.array.blocks.count == 0) {
+                            self.model.textToMatrix()
+                            self.model.state = self.model.encrypt ? .roundKey : .key
+                            self.model.loadStartKeys()
+                        } else {
+                            self.model.nextState()
+                            print("next step")
+                        }
                     }
 
             }
