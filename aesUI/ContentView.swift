@@ -73,7 +73,7 @@ struct ContentView: View {
                                 }).disabled(self.model.array.blocks.count == 0 || !self.model.result.isEmpty)
                                 Button(action: {
                                     while(self.model.state != (self.model.encrypt ? Model.operationState.ciphertext : Model.operationState.plaintext)) {
-                                    self.model.nextState()
+                                            self.model.nextState()
                                     }
                                 }, label:{
                                     Image(systemName: "forward.fill")

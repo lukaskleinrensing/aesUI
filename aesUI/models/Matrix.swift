@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct Matrix {
     
@@ -64,19 +65,21 @@ struct Matrix {
     }
     
     mutating func updateBlocks(_ newBlocks: [UInt8]) {
-        
-        for j in 0..<self.blocks.count {
-            self.blocks[j].history = self.blocks[j].value
-            self.blocks[j].value = newBlocks[j]
+        withAnimation(.easeInOut(duration: 1)) {
+            for j in 0..<self.blocks.count {
+                self.blocks[j].history = self.blocks[j].value
+                self.blocks[j].value = newBlocks[j]
+            }
         }
     }
     
     mutating func updateBlocks(_ newBlocks: [Block]) {
-        
-        for j in 0..<self.blocks.count {
-            self.blocks[j].value = newBlocks[j].value
-            self.blocks[j].id = newBlocks[j].id
-            self.blocks[j].history = newBlocks[j].history
+        withAnimation(.easeInOut(duration: 1)){
+            for j in 0..<self.blocks.count {
+                self.blocks[j].value = newBlocks[j].value
+                self.blocks[j].id = newBlocks[j].id
+                self.blocks[j].history = newBlocks[j].history
+            }
         }
     }
     

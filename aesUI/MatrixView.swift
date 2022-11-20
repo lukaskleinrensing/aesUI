@@ -29,6 +29,7 @@ struct MatrixView: View {
                     ForEach(model.array.blocks, id: \.self) { block in
                         BlockView(block: block)
                             .frame(width: (geo.size.width / CGFloat(blockCount)) - 10 )
+                            .rotation3DEffect(Angle(degrees: model.animationAmount), axis: (1,0,0))
 
                     }
                 }

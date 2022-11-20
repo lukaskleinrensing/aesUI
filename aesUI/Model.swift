@@ -22,6 +22,7 @@ class Model: ObservableObject {
     @Published var isCalculating = false
     @Published var encrypt = true
     
+    
     var gridSize: Int = 4
     var matrixBlockCount: Int {
         switch self.selectedBitType {
@@ -57,6 +58,7 @@ class Model: ObservableObject {
         }
     }
     @Published var selectedBlocks = Set<UUID>()
+    @Published var animationAmount = CGFloat(0)
 
 
     init(text: String = "") {
@@ -68,15 +70,7 @@ class Model: ObservableObject {
         
         self.text = text
         self.array = Matrix(blocks: blocks, typ: MatrixType.bit128)
-    }
-
-    func testmove() {
-
-        withAnimation(.easeInOut(duration: animationSpeed)) {
-//            let object = array[array.blocks.count - 1]
-//            array = array.dropLast(1)
-//            array.insert(object!, at: 3)
-        }
+    
     }
 //MARK: Next State
     func nextState() {
@@ -105,7 +99,7 @@ class Model: ObservableObject {
             case .subByte:
                 // Verschlüsselung
                 if self.encrypt {
-
+                 
                         subBits()
 
                     self.state = .shiftRows
