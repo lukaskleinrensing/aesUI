@@ -37,6 +37,7 @@ struct ContentView: View {
                     .font(.system(size: 20))
                     .onSubmit {model.textToMatrix()
                         self.model.state = self.model.encrypt ? .roundKey : .key
+                        self.model.loadStartKeys()
                     }
 
             }

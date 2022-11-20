@@ -22,7 +22,19 @@ struct CalcMixColumnsView: View {
             case .roundKey:
                 DefaultClacView()
             case .subByte:
-                DefaultClacView()
+                VStack (alignment: .center, spacing: 10){
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        Text("Es erfolgt ein Ersetzen nach der Rijndael S-Box")
+                            .font(.title)
+                        Image(systemName: "info.bubble.fill").help(Text("ToDo: Add Sub-List"))
+                            .font(.title)
+                        Spacer()
+                    }
+                    Spacer()
+                    
+                }
             case .shiftRows:
                 DefaultClacView()
             case .key:

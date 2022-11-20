@@ -47,6 +47,10 @@ class Model: ObservableObject {
             objectWillChange.send()
         }
     }
+    @Published var w0: String = "16909060"
+    @Published var w1: String = "84281096"
+    @Published var w2: String = "35948948"
+    @Published var w3: String = "2509674392"
     @Published var key: Key = Key(initWords: [16909060, 84281096, 35948948, 2509674392])
     @Published var result: String = ""
     @Published var roundKeys = Array<String>()
@@ -72,6 +76,11 @@ class Model: ObservableObject {
         self.array = Matrix(blocks: blocks, typ: MatrixType.bit128)
     
     }
+    
+    func loadStartKeys() {
+        self.key = Key(initWords: [UInt32(Int(self.w0) ?? 0), UInt32(Int(self.w1) ?? 0), UInt32(Int(self.w2) ?? 0), UInt32(Int(self.w3) ?? 0)])
+    }
+    
 //MARK: Next State
     func nextState() {
         self.isCalculating = true
