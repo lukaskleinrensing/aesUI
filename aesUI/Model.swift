@@ -91,11 +91,13 @@ class Model: ObservableObject {
             case .roundKey:
                 // Verschlüsselung
                 if self.encrypt {
-                    self.array.addRoundKey(key.generateRoundKey(round: (self.roundCount + 1)))
+                    print("[RoundKey]Verschlüssele mit \(key.generateRoundKey(round: (self.roundCount)))")
+                    self.array.addRoundKey(key.generateRoundKey(round: (self.roundCount)))
                     self.state = .subByte
                 } // Entschlüsselung
                 else {
-                    self.array.addRoundKey(key.generateRoundKey(round: (self.maxRounds - self.roundCount) + 1))
+                    print("[RoundKey]Entschlüssele mit \(key.generateRoundKey(round: (self.maxRounds - self.roundCount)))")
+                    self.array.addRoundKey(key.generateRoundKey(round: (self.maxRounds - self.roundCount)))
                     self.state = .plaintext
                 }
             case .subByte:
@@ -152,6 +154,7 @@ class Model: ObservableObject {
             case .key:
                 // Verschlüsselung
                 if self.encrypt {
+                    print("[Key]Verschlüssele mit \(key.generateRoundKey(round: (self.roundCount + 1)))")
                     self.array.addRoundKey(key.generateRoundKey(round: (self.roundCount + 1)))
                     if self.maxRounds == self.roundCount {
                         self.state = .ciphertext
@@ -162,6 +165,7 @@ class Model: ObservableObject {
                     }
                 } // Entschlüsselung
                 else {
+                    print("[Key]Entschlüssele mit \(key.generateRoundKey(round: (self.maxRounds - self.roundCount) + 1))")
                     self.array.addRoundKey(key.generateRoundKey(round: (self.maxRounds - self.roundCount) + 1))
                     self.state = .mixColumns
                 }
