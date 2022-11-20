@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0186AFF02915BF60009E7518 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186AFEF2915BF60009E7518 /* Matrix.swift */; };
 		0186AFF22915D9D3009E7518 /* BlockSupplantHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186AFF12915D9D3009E7518 /* BlockSupplantHelper.swift */; };
+		01AF7176292A560E00224CB4 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AF7175292A560E00224CB4 /* Key.swift */; };
 		01BB7C622915BA5E009F5569 /* aesUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BB7C612915BA5E009F5569 /* aesUIApp.swift */; };
 		01BB7C642915BA5E009F5569 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BB7C632915BA5E009F5569 /* ContentView.swift */; };
 		01BB7C662915BA60009F5569 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01BB7C652915BA60009F5569 /* Assets.xcassets */; };
@@ -50,6 +51,7 @@
 /* Begin PBXFileReference section */
 		0186AFEF2915BF60009E7518 /* Matrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix.swift; sourceTree = "<group>"; };
 		0186AFF12915D9D3009E7518 /* BlockSupplantHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockSupplantHelper.swift; sourceTree = "<group>"; };
+		01AF7175292A560E00224CB4 /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		01BB7C5E2915BA5E009F5569 /* aesUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = aesUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01BB7C612915BA5E009F5569 /* aesUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = aesUIApp.swift; sourceTree = "<group>"; };
 		01BB7C632915BA5E009F5569 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				0186AFEF2915BF60009E7518 /* Matrix.swift */,
 				0186AFF12915D9D3009E7518 /* BlockSupplantHelper.swift */,
 				B014D89D291F1A4C00D41787 /* Encoding.swift */,
+				01AF7175292A560E00224CB4 /* Key.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 				B00572E72915C55F00DD75AC /* Extension_Array.swift in Sources */,
 				01BB7C642915BA5E009F5569 /* ContentView.swift in Sources */,
 				B014D896291717A600D41787 /* BlockView.swift in Sources */,
+				01AF7176292A560E00224CB4 /* Key.swift in Sources */,
 				B014D8982917184A00D41787 /* Block.swift in Sources */,
 				01BB7C622915BA5E009F5569 /* aesUIApp.swift in Sources */,
 			);
