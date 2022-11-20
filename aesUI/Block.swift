@@ -26,9 +26,15 @@ struct Block: Identifiable, Hashable {
 
         }
     }
+    
     var text: String {
         return value.description
     }
+    
+    var binaryRepresentation: String {
+        String(self.value, radix: 2)
+    }
+    
     var history: UInt8?
 
     var animationAmount = CGFloat(0)

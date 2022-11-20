@@ -241,13 +241,14 @@ class Model: ObservableObject {
     }
     
     func resetApp() {
+        self.state = self.encrypt ? .plaintext : .ciphertext
+        
         self.text = ""
         self.result = ""
         self.roundCount = 0
         
         let blocks = [Block]()
         self.array = Matrix(blocks: blocks, typ: self.array.typ)
-        self.state = self.encrypt ? .plaintext : .ciphertext
         
         self.roundKeys.removeAll()
         self.selectedBlocks.removeAll()
