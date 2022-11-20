@@ -41,8 +41,12 @@ struct ContentView: View {
                             self.model.state = self.model.encrypt ? .roundKey : .key
                             self.model.loadStartKeys()
                         } else {
-                            self.model.nextState()
-                            print("next step")
+                            if(self.model.result.isEmpty) {
+                                self.model.nextState()
+                                print("next step")
+                            } else {
+                                self.showingAlert.toggle()
+                            }
                         }
                     }
 
