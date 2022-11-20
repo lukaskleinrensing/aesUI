@@ -236,6 +236,22 @@ struct Matrix {
         
         updateBlocks(result)
     }
+    
+    func addRoundKey(_ keys: [UInt32]) {
+        
+        var blocks = emptyArrayOfBlocks(16)
+        
+        if (keys.count != self.blocks.count / 4) { return } //TODO: Throw error: Invalid key lenght
+        
+        for i in 0..<keys.count {
+            let words = Key.getBytesForWord(keys[i])
+            
+            for j in 0...3 {
+                blocks[(i*4) + j] = self.blocks[(i*4) + j].value ^ words[j]
+            }
+        }
+    }
+    
 }
 
 struct MatrixHelper {

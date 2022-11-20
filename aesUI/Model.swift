@@ -46,7 +46,7 @@ class Model: ObservableObject {
             objectWillChange.send()
         }
     }
-    @Published var key: String = ""
+    @Published var key: Key = Key(initWords: [16909060, 84281096, 35948948, 2509674392])
     @Published var result: String = ""
     @Published var roundKeys = Array<String>()
 
@@ -97,9 +97,11 @@ class Model: ObservableObject {
             case .roundKey:
                 // Verschlüsselung
                 if self.encrypt {
+                    self.array.addRoundKey(key.generateRoundKey(round: (self.roundCount + 1)))
                     self.state = .subByte
                 } // Entschlüsselung
                 else {
+                    self.array.addRoundKey(key.generateRoundKey(round: (self.maxRounds - self.roundCount) + 1))
                     self.state = .plaintext
                 }
             case .subByte:
@@ -156,6 +158,7 @@ class Model: ObservableObject {
             case .key:
                 // Verschlüsselung
                 if self.encrypt {
+                    self.array.addRoundKey(key.generateRoundKey(round: (self.roundCount + 1)))
                     if self.maxRounds == self.roundCount {
                         self.state = .ciphertext
                     } else {
@@ -165,6 +168,7 @@ class Model: ObservableObject {
                     }
                 } // Entschlüsselung
                 else {
+                    self.array.addRoundKey(key.generateRoundKey(round: (self.maxRounds - self.roundCount) + 1))
                     self.state = .mixColumns
                 }
             case .ciphertext:

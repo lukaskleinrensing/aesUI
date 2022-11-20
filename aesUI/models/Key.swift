@@ -13,9 +13,18 @@ struct Key {
     
     let typ = KeyType.bit128
     let initWords: [UInt32]
+    var wordsAsString: String {
+        var string = "["
+        
+        for i in 0..<initWords.count {
+            string = string + "\(initWords[i]) "
+        }
+        
+        return string + "]"
+    }
     
     
-    func getBytesForWord(_ word: UInt32) -> [UInt8] {
+    static func getBytesForWord(_ word: UInt32) -> [UInt8] {
         var w = word
         var result: [UInt8] = [0, 0, 0, 0]
 

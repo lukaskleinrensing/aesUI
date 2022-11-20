@@ -142,7 +142,7 @@ struct ContentView: View {
                 }
 
             }
-            TextField("Schlüssel", text: self.$model.key)
+            Text(String("\(self.$model.key)"))
                 .font(.system(size: 20))
             TextField(self.model.encrypt ? "Chiffrat" : "Klartext", text: self.$model.result)
                 .font(.system(size: 20))
