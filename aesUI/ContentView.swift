@@ -80,6 +80,7 @@ struct ContentView: View {
                                     while(self.model.state != (self.model.encrypt ? Model.operationState.ciphertext : Model.operationState.plaintext)) {
                                             self.model.nextState()
                                     }
+                                    self.model.nextState()
                                 }, label:{
                                     Image(systemName: "forward.fill")
                                         .padding()
