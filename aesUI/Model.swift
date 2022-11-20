@@ -52,6 +52,8 @@ class Model: ObservableObject {
     @Published var w2: String = "35948948"
     @Published var w3: String = "2509674392"
     @Published var key: Key = Key(initWords: [16909060, 84281096, 35948948, 2509674392])
+    @Published var rcon: UInt8 = 170
+    @Published var rconString = "170"
     @Published var result: String = ""
     @Published var roundKeys = Array<String>()
 
@@ -100,13 +102,13 @@ class Model: ObservableObject {
             case .roundKey:
                 // Verschlüsselung
                 if self.encrypt {
-                    print("[RoundKey]Verschlüssele mit \(key.generateRoundKey(round: (self.roundCount)))")
-                    self.array.addRoundKey(key.generateRoundKey(round: (self.roundCount)))
+                    print("[RoundKey]Verschlüssele mit \(key.generateRoundKeyForRound((self.roundCount), startRcon: self.rcon))")
+                    self.array.addRoundKey(key.generateRoundKeyForRound((self.roundCount), startRcon: self.rcon))
                     self.state = .subByte
                 } // Entschlüsselung
                 else {
-                    print("[RoundKey]Entschlüssele mit \(key.generateRoundKey(round: (self.maxRounds - self.roundCount)))")
-                    self.array.addRoundKey(key.generateRoundKey(round: (self.maxRounds - self.roundCount)))
+                    print("[RoundKey]Entschlüssele mit \(key.generateRoundKeyForRound((self.maxRounds - self.roundCount), startRcon: self.rcon))")
+                    self.array.addRoundKey(key.generateRoundKeyForRound((self.maxRounds - self.roundCount), startRcon: self.rcon))
                     self.state = .plaintext
                 }
             case .subByte:
@@ -163,8 +165,8 @@ class Model: ObservableObject {
             case .key:
                 // Verschlüsselung
                 if self.encrypt {
-                    print("[Key]Verschlüssele mit \(key.generateRoundKey(round: (self.roundCount + 1)))")
-                    self.array.addRoundKey(key.generateRoundKey(round: (self.roundCount + 1)))
+                    print("[Key]Verschlüssele mit \(key.generateRoundKeyForRound((self.roundCount + 1), startRcon: self.rcon))")
+                    self.array.addRoundKey(key.generateRoundKeyForRound((self.roundCount + 1), startRcon: self.rcon))
                     if self.maxRounds == self.roundCount {
                         self.state = .ciphertext
                     } else {
@@ -174,8 +176,8 @@ class Model: ObservableObject {
                     }
                 } // Entschlüsselung
                 else {
-                    print("[Key]Entschlüssele mit \(key.generateRoundKey(round: (self.maxRounds - self.roundCount) + 1))")
-                    self.array.addRoundKey(key.generateRoundKey(round: (self.maxRounds - self.roundCount) + 1))
+                    print("[Key]Entschlüssele mit \(key.generateRoundKeyForRound(((self.maxRounds - self.roundCount) + 1), startRcon: self.rcon))")
+                    self.array.addRoundKey(key.generateRoundKeyForRound(((self.maxRounds - self.roundCount) + 1), startRcon: self.rcon))
                     self.state = .mixColumns
                 }
             case .ciphertext:

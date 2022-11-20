@@ -71,7 +71,7 @@ struct CalcMixColumnsView: View {
             
             var keyList = [UInt8]()
             
-            let currentKeyWords =  self.model.key.generateRoundKey(round: self.model.encrypt ? (self.model.roundCount + 1) : ((self.model.maxRounds - self.model.roundCount) + 1))
+            let currentKeyWords =  self.model.key.generateRoundKeyForRound(self.model.encrypt ? (self.model.roundCount + 1) : ((self.model.maxRounds - self.model.roundCount) + 1), startRcon: self.model.rcon)
             
             for g in 0..<currentKeyWords.count {
                 let wordAsKeys = Key.getBytesForWord(currentKeyWords[g])
