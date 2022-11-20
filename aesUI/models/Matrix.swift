@@ -240,7 +240,7 @@ struct Matrix {
         updateBlocks(result)
     }
     
-    func addRoundKey(_ keys: [UInt32]) {
+    mutating func addRoundKey(_ keys: [UInt32]) {
         
         var blocks = emptyArrayOfBlocks(16)
         
@@ -253,6 +253,8 @@ struct Matrix {
                 blocks[(i*4) + j] = self.blocks[(i*4) + j].value ^ words[j]
             }
         }
+        
+        self.updateBlocks(blocks)
     }
     
 }
