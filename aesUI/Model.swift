@@ -126,7 +126,7 @@ class Model: ObservableObject {
                         break
                     }
                     if self.maxRounds == self.roundCount {
-                        self.state = .plaintext
+                        self.state = .roundKey
                     } else {
                         self.roundCount += 1
                         print(self.roundCount)

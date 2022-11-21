@@ -63,7 +63,7 @@ struct Key {
             
             var resultAsArray = [UInt8]()
             var resultAsBinaryArray = [String]()
-            print("Result: \(String(result, radix: 2)))")
+//            print("Result: \(String(result, radix: 2)))")
             
             for _ in 0...3 {
                 resultAsArray.append(UInt8(result % 256))
@@ -71,20 +71,20 @@ struct Key {
                 result = result / 256
             }
             
-            print("Result as binary array: \(resultAsBinaryArray)")
+//            print("Result as binary array: \(resultAsBinaryArray)")
             
             do {
                 try result = UInt32(BlockSupplantHelper.getSubBlockFor(resultAsArray[3]))
-                print("SubBlock for \(resultAsArray[3]): \(result)")
+//                print("SubBlock for \(resultAsArray[3]): \(result)")
                 
                 for i in 1...3 {
                     result = result * 256
                     try result += UInt32(BlockSupplantHelper.getSubBlockFor(resultAsArray[3 - i]))
-                    try print("SubBlock for \(resultAsArray[3-i]): \(String(BlockSupplantHelper.getSubBlockFor(resultAsArray[3 - i]), radix: 2))")
+//                    try print("SubBlock for \(resultAsArray[3-i]): \(String(BlockSupplantHelper.getSubBlockFor(resultAsArray[3 - i]), radix: 2))")
                 }
             } catch { return word } //TODO: Throw error
             
-            print("Result after substitution: \(String(result, radix: 2))")
+//            print("Result after substitution: \(String(result, radix: 2))")
 
             // STEP THREE - xor with rcon
             
